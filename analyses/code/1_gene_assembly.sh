@@ -10,8 +10,11 @@
 
 # Load modules
 module load bioinfo-tools
-module load ....
+module load canu
 
-# Your commands
-<Command_1...>
-<Command_2...>
+# Your commands !!TODO locate the files correctly
+canu \
+ -p durian -d durian-pacbio \
+ genomeSize=128m \ #125-130m
+ -pacbio-raw ../01_PacBiok_genome_assembly/SRR6037732_scaffold_11.fq.gz
+\

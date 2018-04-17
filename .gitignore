@@ -1,4 +1,4 @@
 .DS_Store
-./analyses/data
-*.gz
+analyses/data/raw_data/
+
 # ./analyses/01_PacBio_genome_assembly #

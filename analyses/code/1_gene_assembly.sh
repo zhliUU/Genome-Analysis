@@ -14,7 +14,7 @@ module load canu
 
 # Your commands !!TODO locate the files correctly
 canu \
- -p durian -d durian-pacbio \
+ -p durian -d ../01_PacBio_genome_assembly/durian-pacbio \
  genomeSize=128m \ #125-130m
  -pacbio-raw ../data/WGS_trimmed_data/SRR6037732_scaffold_11.fq.gz
 \

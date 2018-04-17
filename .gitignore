@@ -1,4 +1,6 @@
 .DS_Store
-analyses/data/raw_data/
+analyses/data/RNA_raw_data/
+analyses/data/RNA_trimmed_data/
+analyses/data/WGS_trimmed_data/
 
 # ./analyses/01_PacBio_genome_assembly #

@@ -1,0 +1,12 @@
+PASS	Basic Statistics	SRR6040095_scaffold_11.1.fastq.gz
+PASS	Per base sequence quality	SRR6040095_scaffold_11.1.fastq.gz
+WARN	Per tile sequence quality	SRR6040095_scaffold_11.1.fastq.gz
+PASS	Per sequence quality scores	SRR6040095_scaffold_11.1.fastq.gz
+FAIL	Per base sequence content	SRR6040095_scaffold_11.1.fastq.gz
+FAIL	Per sequence GC content	SRR6040095_scaffold_11.1.fastq.gz
+PASS	Per base N content	SRR6040095_scaffold_11.1.fastq.gz
+PASS	Sequence Length Distribution	SRR6040095_scaffold_11.1.fastq.gz
+FAIL	Sequence Duplication Levels	SRR6040095_scaffold_11.1.fastq.gz
+FAIL	Overrepresented sequences	SRR6040095_scaffold_11.1.fastq.gz
+PASS	Adapter Content	SRR6040095_scaffold_11.1.fastq.gz
+FAIL	Kmer Content	SRR6040095_scaffold_11.1.fastq.gz

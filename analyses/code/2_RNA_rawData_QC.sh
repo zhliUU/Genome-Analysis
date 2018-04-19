@@ -13,7 +13,7 @@ module load bioinfo-tools
 module load FastQC #or fastqc?
 
 # Your commands
-output=../02_RNA_rawData_QC/FASTQC_results #TODO: locate the data correctly
+output=/home/zhiwei94/Genome-Analysis/analyses/02_RNA_rawData_QC #TODO: locate the data correctly
 touch repoerForFastQC
 echo "Running fastqc..." > repoerForFastQC #save to some known file to check easiler
 for file in ../data/RNA_raw_data/*.fastq.gz #works for compressed file

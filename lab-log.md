@@ -6,11 +6,23 @@
 
 **X** Folder structure /data and each step folder:
 
-   data will be placed in data folder with symbolic link
+​     data will be placed in data folder with symbolic link
 
-Prepare script
+**x**Prepare script
 
-Try fastQC locally and understand the output
+**TODO**Try fastQC locally and understand the output
+
+## 19th Apr:
+
+Submit the PacBio read assembly successfully
+
+Understand the output of fastQC
+
+Make script for BWA
+
+
+
+
 
 
 

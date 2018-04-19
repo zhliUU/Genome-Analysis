@@ -14,13 +14,14 @@ module load FastQC #or fastqc?
 
 # Your commands
 output=../02_RNA_rawData_QC/FASTQC_results #TODO: locate the data correctly
-echo "Running fastqc..." #> save to some known file to check easiler
+touch repoerForFastQC
+echo "Running fastqc..." > repoerForFastQC #save to some known file to check easiler
 for file in ../data/RNA_raw_data/*.fastq.gz #works for compressed file
 do
 	fastqc -f fastq -o $output $file
 done
 cd $output
-echo "Unzipping..."
+echo "Unzipping..." >> repoerForFastQC
 for zip in *.zip
 do
   unzip $zip

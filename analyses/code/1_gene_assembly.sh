@@ -16,6 +16,6 @@ module load canu
 #/home/zhiwei94/Genome-Analysis/analyses/data
 canu \
  -p durian -d /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio \
- genomeSize=128m \ #125-130m
+ genomeSize=128m \
  -pacbio-raw /home/zhiwei94/Genome-Analysis/analyses/data/WGS_trimmed_data/SRR6037732_scaffold_11.fq.gz
 \

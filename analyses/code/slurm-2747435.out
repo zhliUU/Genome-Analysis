@@ -1,0 +1,1394 @@
+canu/1.7 has the useGrid option default set to useGrid=false. This can be overriden by another configuration file or a command-line option.
+canu/1.7 has the useGrid option default set to useGrid=false. This can be overriden by another configuration file or a command-line option.
+canu/1.7 has the useGrid option default set to useGrid=false. This can be overriden by another configuration file or a command-line option.
+canu/1.7 has the useGrid option default set to useGrid=false. This can be overriden by another configuration file or a command-line option.
+-- Canu 1.7
+--
+-- CITATIONS
+--
+-- Koren S, Walenz BP, Berlin K, Miller JR, Phillippy AM.
+-- Canu: scalable and accurate long-read assembly via adaptive k-mer weighting and repeat separation.
+-- Genome Res. 2017 May;27(5):722-736.
+-- http://doi.org/10.1101/gr.215087.116
+-- 
+-- Read and contig alignments during correction, consensus and GFA building use:
+--   Šošic M, Šikic M.
+--   Edlib: a C/C ++ library for fast, exact sequence alignment using edit distance.
+--   Bioinformatics. 2017 May 1;33(9):1394-1395.
+--   http://doi.org/10.1093/bioinformatics/btw753
+-- 
+-- Overlaps are generated using:
+--   Berlin K, et al.
+--   Assembling large genomes with single-molecule sequencing and locality-sensitive hashing.
+--   Nat Biotechnol. 2015 Jun;33(6):623-30.
+--   http://doi.org/10.1038/nbt.3238
+-- 
+--   Myers EW, et al.
+--   A Whole-Genome Assembly of Drosophila.
+--   Science. 2000 Mar 24;287(5461):2196-204.
+--   http://doi.org/10.1126/science.287.5461.2196
+-- 
+--   Li H.
+--   Minimap and miniasm: fast mapping and de novo assembly for noisy long sequences.
+--   Bioinformatics. 2016 Jul 15;32(14):2103-10.
+--   http://doi.org/10.1093/bioinformatics/btw152
+-- 
+-- Corrected read consensus sequences are generated using an algorithm derived from FALCON-sense:
+--   Chin CS, et al.
+--   Phased diploid genome assembly with single-molecule real-time sequencing.
+--   Nat Methods. 2016 Dec;13(12):1050-1054.
+--   http://doi.org/10.1038/nmeth.4035
+-- 
+-- Contig consensus sequences are generated using an algorithm derived from pbdagcon:
+--   Chin CS, et al.
+--   Nonhybrid, finished microbial genome assemblies from long-read SMRT sequencing data.
+--   Nat Methods. 2013 Jun;10(6):563-9
+--   http://doi.org/10.1038/nmeth.2474
+-- 
+-- CONFIGURE CANU
+--
+-- Detected Java(TM) Runtime Environment '1.8.0_151' (from '/sw/comp/java/x86_64/sun_jdk1.8.0_151/bin/java').
+-- Detected gnuplot version '4.6 patchlevel 2' (from 'gnuplot') and image format 'png'.
+-- Detected 20 CPUs and 125 gigabytes of memory.
+-- Detected Slurm with 'sinfo' binary in /usr/bin/sinfo.
+-- Grid engine disabled per useGrid=false option.
+--
+--                            (tag)Concurrency
+--                     (tag)Threads          |
+--            (tag)Memory         |          |
+--        (tag)         |         |          |     total usage     algorithm
+--        -------  ------  --------   --------  -----------------  -----------------------------
+-- Local: meryl     64 GB   16 CPUs x   1 job     64 GB   16 CPUs  (k-mer counting)
+-- Local: cormhap   13 GB   10 CPUs x   2 jobs    26 GB   20 CPUs  (overlap detection with mhap)
+-- Local: obtovl     8 GB    5 CPUs x   4 jobs    32 GB   20 CPUs  (overlap detection)
+-- Local: utgovl     8 GB    5 CPUs x   4 jobs    32 GB   20 CPUs  (overlap detection)
+-- Local: ovb        4 GB    1 CPU  x  20 jobs    80 GB   20 CPUs  (overlap store bucketizer)
+-- Local: ovs        8 GB    1 CPU  x  15 jobs   120 GB   15 CPUs  (overlap store sorting)
+-- Local: red        8 GB    4 CPUs x   5 jobs    40 GB   20 CPUs  (read error detection)
+-- Local: oea        4 GB    1 CPU  x  20 jobs    80 GB   20 CPUs  (overlap error adjustment)
+-- Local: bat       64 GB    8 CPUs x   1 job     64 GB    8 CPUs  (contig construction)
+-- Local: gfa        8 GB    8 CPUs x   1 job      8 GB    8 CPUs  (GFA alignment and processing)
+--
+-- Found PacBio uncorrected reads in the input files.
+--
+-- Generating assembly 'durian' in '/pica/h1/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio'
+--
+-- Parameters:
+--
+--  genomeSize        128000000
+--
+--  Overlap Generation Limits:
+--    corOvlErrorRate 0.2400 ( 24.00%)
+--    obtOvlErrorRate 0.0450 (  4.50%)
+--    utgOvlErrorRate 0.0450 (  4.50%)
+--
+--  Overlap Processing Limits:
+--    corErrorRate    0.3000 ( 30.00%)
+--    obtErrorRate    0.0450 (  4.50%)
+--    utgErrorRate    0.0450 (  4.50%)
+--    cnsErrorRate    0.0750 (  7.50%)
+--
+--
+-- BEGIN CORRECTION
+--
+----------------------------------------
+-- Starting command on Thu Apr 19 14:42:06 2018 with 1054.714 GB free disk space
+
+    cd .
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/gatekeeperCreate \
+      -minlength 1000 \
+      -o ./durian.gkpStore.BUILDING \
+      ./durian.gkpStore.gkp \
+    > ./durian.gkpStore.BUILDING.err 2>&1
+
+-- Finished on Thu Apr 19 14:42:43 2018 (37 seconds) with 1054.246 GB free disk space
+----------------------------------------
+--
+-- In gatekeeper store './durian.gkpStore':
+--   Found 245450 reads.
+--   Found 1872884302 bases (14.63 times coverage).
+--
+--   Read length histogram (one '*' equals 304.41 reads):
+--        0    999      0 
+--     1000   1999  19824 *****************************************************************
+--     2000   2999  20215 ******************************************************************
+--     3000   3999  21309 **********************************************************************
+--     4000   4999  21179 *********************************************************************
+--     5000   5999  19902 *****************************************************************
+--     6000   6999  19549 ****************************************************************
+--     7000   7999  19539 ****************************************************************
+--     8000   8999  19702 ****************************************************************
+--     9000   9999  18216 ***********************************************************
+--    10000  10999  15530 ***************************************************
+--    11000  11999  12246 ****************************************
+--    12000  12999   9099 *****************************
+--    13000  13999   6965 **********************
+--    14000  14999   5279 *****************
+--    15000  15999   4090 *************
+--    16000  16999   3121 **********
+--    17000  17999   2458 ********
+--    18000  18999   1892 ******
+--    19000  19999   1353 ****
+--    20000  20999   1005 ***
+--    21000  21999    742 **
+--    22000  22999    597 *
+--    23000  23999    415 *
+--    24000  24999    286 
+--    25000  25999    240 
+--    26000  26999    166 
+--    27000  27999    146 
+--    28000  28999     91 
+--    29000  29999     73 
+--    30000  30999     47 
+--    31000  31999     51 
+--    32000  32999     30 
+--    33000  33999     21 
+--    34000  34999     25 
+--    35000  35999     14 
+--    36000  36999     14 
+--    37000  37999      4 
+--    38000  38999      3 
+--    39000  39999      4 
+--    40000  40999      2 
+--    41000  41999      2 
+--    42000  42999      2 
+--    43000  43999      0 
+--    44000  44999      1 
+--    45000  45999      1 
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'meryl' concurrent execution on Thu Apr 19 14:42:46 2018 with 1054.244 GB free disk space (1 processes; 1 concurrently)
+
+    cd correction/0-mercounts
+    ./meryl.sh 1 > ./meryl.000001.out 2>&1
+
+-- Finished on Thu Apr 19 14:47:54 2018 (308 seconds) with 1051.765 GB free disk space
+----------------------------------------
+-- Meryl finished successfully.
+--
+--  16-mers                                                                                           Fraction
+--    Occurrences   NumMers                                                                         Unique Total
+--       1-     1 356324226 *******************************************************************--> 0.5801 0.1906
+--       2-     2 112448393 ********************************************************************** 0.7631 0.3109
+--       3-     4  74339377 **********************************************                         0.8423 0.3890
+--       5-     7  33484350 ********************                                                   0.9095 0.4856
+--       8-    11  16999197 **********                                                             0.9480 0.5718
+--      12-    16   9047597 *****                                                                  0.9704 0.6473
+--      17-    22   4585255 **                                                                     0.9828 0.7069
+--      23-    29   2454024 *                                                                      0.9893 0.7499
+--      30-    37   1392994                                                                        0.9929 0.7814
+--      38-    46    830656                                                                        0.9950 0.8048
+--      47-    56    531282                                                                        0.9963 0.8225
+--      57-    67    375623                                                                        0.9971 0.8366
+--      68-    79    285370                                                                        0.9977 0.8487
+--      80-    92    225093                                                                        0.9981 0.8598
+--      93-   106    176966                                                                        0.9985 0.8699
+--     107-   121    139247                                                                        0.9988 0.8792
+--     122-   137    110782                                                                        0.9990 0.8876
+--     138-   154     87864                                                                        0.9992 0.8952
+--     155-   172     71241                                                                        0.9993 0.9019
+--     173-   191     57019                                                                        0.9994 0.9081
+--     192-   211     46053                                                                        0.9995 0.9136
+--     212-   232     37105                                                                        0.9996 0.9185
+--     233-   254     30390                                                                        0.9996 0.9229
+--     255-   277     23620                                                                        0.9997 0.9268
+--     278-   301     18923                                                                        0.9997 0.9301
+--     302-   326     15078                                                                        0.9998 0.9330
+--     327-   352     12580                                                                        0.9998 0.9355
+--     353-   379     10606                                                                        0.9998 0.9378
+--     380-   407      8949                                                                        0.9998 0.9399
+--     408-   436      7698                                                                        0.9998 0.9417
+--     437-   466      6795                                                                        0.9999 0.9435
+--     467-   497      6241                                                                        0.9999 0.9451
+--     498-   529      5781                                                                        0.9999 0.9467
+--     530-   562      5360                                                                        0.9999 0.9483
+--     563-   596      5001                                                                        0.9999 0.9499
+--     597-   631      4532                                                                        0.9999 0.9514
+--     632-   667      4277                                                                        0.9999 0.9529
+--     668-   704      3914                                                                        0.9999 0.9544
+--     705-   742      3476                                                                        0.9999 0.9558
+--     743-   781      3142                                                                        0.9999 0.9571
+--     782-   821      2834                                                                        0.9999 0.9584
+--
+--     1414331 (max occurrences)
+--  1512878326 (total mers, non-unique)
+--   257944032 (distinct mers, non-unique)
+--   356324226 (unique mers)
+-- For mhap overlapping, set repeat k-mer threshold to 18692.
+--
+-- Found 1869202552 16-mers; 614268258 distinct and 356324226 unique.  Largest count 1414331.
+--
+-- OVERLAPPER (mhap) (correction)
+--
+-- Set corMhapSensitivity=high based on read coverage of 14.
+--
+-- PARAMETERS: hashes=768, minMatches=2, threshold=0.73
+--
+-- Given 13 GB, can fit 19500 reads per block.
+-- For 14 blocks, set stride to 2 blocks.
+-- Logging partitioning to 'correction/1-overlapper/partitioning.log'.
+-- Configured 13 mhap precompute jobs.
+-- Configured 43 mhap overlap jobs.
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'cormhap' concurrent execution on Thu Apr 19 14:48:29 2018 with 1054.241 GB free disk space (13 processes; 2 concurrently)
+
+    cd correction/1-overlapper
+    ./precompute.sh 1 > ./precompute.000001.out 2>&1
+    ./precompute.sh 2 > ./precompute.000002.out 2>&1
+    ./precompute.sh 3 > ./precompute.000003.out 2>&1
+    ./precompute.sh 4 > ./precompute.000004.out 2>&1
+    ./precompute.sh 5 > ./precompute.000005.out 2>&1
+    ./precompute.sh 6 > ./precompute.000006.out 2>&1
+    ./precompute.sh 7 > ./precompute.000007.out 2>&1
+    ./precompute.sh 8 > ./precompute.000008.out 2>&1
+    ./precompute.sh 9 > ./precompute.000009.out 2>&1
+    ./precompute.sh 10 > ./precompute.000010.out 2>&1
+    ./precompute.sh 11 > ./precompute.000011.out 2>&1
+    ./precompute.sh 12 > ./precompute.000012.out 2>&1
+    ./precompute.sh 13 > ./precompute.000013.out 2>&1
+
+-- Finished on Thu Apr 19 20:13:55 2018 (19526 seconds) with 1047.233 GB free disk space
+----------------------------------------
+-- All 13 mhap precompute jobs finished successfully.
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'cormhap' concurrent execution on Thu Apr 19 20:13:58 2018 with 1047.233 GB free disk space (43 processes; 2 concurrently)
+
+    cd correction/1-overlapper
+    ./mhap.sh 1 > ./mhap.000001.out 2>&1
+    ./mhap.sh 2 > ./mhap.000002.out 2>&1
+    ./mhap.sh 3 > ./mhap.000003.out 2>&1
+    ./mhap.sh 4 > ./mhap.000004.out 2>&1
+    ./mhap.sh 5 > ./mhap.000005.out 2>&1
+    ./mhap.sh 6 > ./mhap.000006.out 2>&1
+    ./mhap.sh 7 > ./mhap.000007.out 2>&1
+    ./mhap.sh 8 > ./mhap.000008.out 2>&1
+    ./mhap.sh 9 > ./mhap.000009.out 2>&1
+    ./mhap.sh 10 > ./mhap.000010.out 2>&1
+    ./mhap.sh 11 > ./mhap.000011.out 2>&1
+    ./mhap.sh 12 > ./mhap.000012.out 2>&1
+    ./mhap.sh 13 > ./mhap.000013.out 2>&1
+    ./mhap.sh 14 > ./mhap.000014.out 2>&1
+    ./mhap.sh 15 > ./mhap.000015.out 2>&1
+    ./mhap.sh 16 > ./mhap.000016.out 2>&1
+    ./mhap.sh 17 > ./mhap.000017.out 2>&1
+    ./mhap.sh 18 > ./mhap.000018.out 2>&1
+    ./mhap.sh 19 > ./mhap.000019.out 2>&1
+    ./mhap.sh 20 > ./mhap.000020.out 2>&1
+    ./mhap.sh 21 > ./mhap.000021.out 2>&1
+    ./mhap.sh 22 > ./mhap.000022.out 2>&1
+    ./mhap.sh 23 > ./mhap.000023.out 2>&1
+    ./mhap.sh 24 > ./mhap.000024.out 2>&1
+    ./mhap.sh 25 > ./mhap.000025.out 2>&1
+    ./mhap.sh 26 > ./mhap.000026.out 2>&1
+    ./mhap.sh 27 > ./mhap.000027.out 2>&1
+    ./mhap.sh 28 > ./mhap.000028.out 2>&1
+    ./mhap.sh 29 > ./mhap.000029.out 2>&1
+    ./mhap.sh 30 > ./mhap.000030.out 2>&1
+    ./mhap.sh 31 > ./mhap.000031.out 2>&1
+    ./mhap.sh 32 > ./mhap.000032.out 2>&1
+    ./mhap.sh 33 > ./mhap.000033.out 2>&1
+    ./mhap.sh 34 > ./mhap.000034.out 2>&1
+    ./mhap.sh 35 > ./mhap.000035.out 2>&1
+    ./mhap.sh 36 > ./mhap.000036.out 2>&1
+    ./mhap.sh 37 > ./mhap.000037.out 2>&1
+    ./mhap.sh 38 > ./mhap.000038.out 2>&1
+    ./mhap.sh 39 > ./mhap.000039.out 2>&1
+    ./mhap.sh 40 > ./mhap.000040.out 2>&1
+    ./mhap.sh 41 > ./mhap.000041.out 2>&1
+    ./mhap.sh 42 > ./mhap.000042.out 2>&1
+    ./mhap.sh 43 > ./mhap.000043.out 2>&1
+
+-- Finished on Fri Apr 20 00:33:40 2018 (15582 seconds) with 1040.802 GB free disk space
+----------------------------------------
+-- Found 43 mhap overlap output files.
+----------------------------------------
+-- Starting command on Fri Apr 20 00:33:43 2018 with 1040.802 GB free disk space
+
+    cd correction
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/ovStoreBuild \
+     -O ./durian.ovlStore.BUILDING \
+     -G ./durian.gkpStore \
+     -M 2-8 \
+     -L ./1-overlapper/ovljob.files \
+     > ./durian.ovlStore.err 2>&1
+
+-- Finished on Fri Apr 20 00:43:29 2018 (586 seconds) with 1027.224 GB free disk space
+----------------------------------------
+-- Checking store.
+----------------------------------------
+-- Starting command on Fri Apr 20 00:43:29 2018 with 1027.224 GB free disk space
+
+    cd correction
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/ovStoreDump \
+     -G ./durian.gkpStore \
+     -O ./durian.ovlStore \
+     -d -counts \
+     > ./durian.ovlStore/counts.dat 2> ./durian.ovlStore/counts.err
+
+-- Finished on Fri Apr 20 00:43:30 2018 (1 second) with 1027.221 GB free disk space
+----------------------------------------
+--
+-- Overlap store 'correction/durian.ovlStore' successfully constructed.
+-- Found 727752346 overlaps for 245430 reads; 20 reads have no overlaps.
+--
+--
+-- Purged 54.056 GB in 177 overlap output files.
+-- Set corMinCoverage=0 based on read coverage of 14.
+-- Global filter scores will be estimated.
+-- Computing correction layouts.
+----------------------------------------
+-- Starting command on Fri Apr 20 00:43:35 2018 with 1040.656 GB free disk space
+
+    cd correction
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/generateCorrectionLayouts \
+      -G ./durian.gkpStore \
+      -O ./durian.ovlStore \
+      -C ./durian.corStore.WORKING \
+      -ec 0 \
+      -eC 80 \
+    > ./durian.corStore.err 2>&1
+    
+
+-- Finished on Fri Apr 20 00:44:21 2018 (46 seconds) with 1040.331 GB free disk space
+----------------------------------------
+-- Computing correction layouts.
+----------------------------------------
+-- Starting command on Fri Apr 20 00:44:21 2018 with 1040.331 GB free disk space
+
+    cd correction/2-correction
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/filterCorrectionLayouts \
+      -G  ../durian.gkpStore \
+      -C  ../durian.corStore \
+      -R  ./durian.readsToCorrect.WORKING \
+      -cc 0 \
+      -cl 1000 \
+      -g  128000000 \
+      -c  40 \
+    > ./durian.readsToCorrect.err 2>&1
+    
+
+-- Finished on Fri Apr 20 00:44:23 2018 (2 seconds) with 1040.313 GB free disk space
+----------------------------------------
+--                             original      original
+--                            raw reads     raw reads
+--   category                w/overlaps  w/o/overlaps
+--   -------------------- ------------- -------------
+--   Number of Reads             238395          7055
+--   Number of Bases         1830385325      42167723
+--   Coverage                    14.300         0.329
+--   Median                        7092          5239
+--   Mean                          7677          5976
+--   N50                           9821          7969
+--   Minimum                       1000             0
+--   Maximum                      45571         36317
+--   
+--                                        --------corrected---------  ----------rescued----------
+--                             evidence                     expected                     expected
+--   category                     reads            raw     corrected            raw     corrected
+--   -------------------- -------------  ------------- -------------  ------------- -------------
+--   Number of Reads             245334         238395        238395              0             0
+--   Number of Bases         1871689994     1830385325    1707565255              0             0
+--   Coverage                    14.623         14.300        13.340          0.000         0.000
+--   Median                        7032           7092          6579              0             0
+--   Mean                          7629           7677          7162              0             0
+--   N50                           9781           9821          9757              0             0
+--   Minimum                       1000           1000             1              0             0
+--   Maximum                      45571          45571         45560              0             0
+--   
+--                        --------uncorrected--------
+--                                           expected
+--   category                       raw     corrected
+--   -------------------- ------------- -------------
+--   Number of Reads               7055          7055
+--   Number of Bases           42167723             0
+--   Coverage                     0.329         0.000
+--   Median                        5239             0
+--   Mean                          5976             0
+--   N50                           7969             0
+--   Minimum                          0             0
+--   Maximum                      36317             0
+--   
+--   Maximum Memory           953551994
+--
+--                            (tag)Concurrency
+--                     (tag)Threads          |
+--            (tag)Memory         |          |
+--        (tag)         |         |          |     total usage     algorithm
+--        -------  ------  --------   --------  -----------------  -----------------------------
+-- Local: cor        4 GB    4 CPUs x   5 jobs    20 GB   20 CPUs  (read correction)
+--
+-- Using overlaps no worse than 0.3 fraction error for correcting reads (from corErrorRate parameter).
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'cor' concurrent execution on Fri Apr 20 00:44:23 2018 with 1040.313 GB free disk space (25 processes; 5 concurrently)
+
+    cd correction/2-correction
+    ./correctReads.sh 1 > ./correctReads.000001.out 2>&1
+    ./correctReads.sh 2 > ./correctReads.000002.out 2>&1
+    ./correctReads.sh 3 > ./correctReads.000003.out 2>&1
+    ./correctReads.sh 4 > ./correctReads.000004.out 2>&1
+    ./correctReads.sh 5 > ./correctReads.000005.out 2>&1
+    ./correctReads.sh 6 > ./correctReads.000006.out 2>&1
+    ./correctReads.sh 7 > ./correctReads.000007.out 2>&1
+    ./correctReads.sh 8 > ./correctReads.000008.out 2>&1
+    ./correctReads.sh 9 > ./correctReads.000009.out 2>&1
+    ./correctReads.sh 10 > ./correctReads.000010.out 2>&1
+    ./correctReads.sh 11 > ./correctReads.000011.out 2>&1
+    ./correctReads.sh 12 > ./correctReads.000012.out 2>&1
+    ./correctReads.sh 13 > ./correctReads.000013.out 2>&1
+    ./correctReads.sh 14 > ./correctReads.000014.out 2>&1
+    ./correctReads.sh 15 > ./correctReads.000015.out 2>&1
+    ./correctReads.sh 16 > ./correctReads.000016.out 2>&1
+    ./correctReads.sh 17 > ./correctReads.000017.out 2>&1
+    ./correctReads.sh 18 > ./correctReads.000018.out 2>&1
+    ./correctReads.sh 19 > ./correctReads.000019.out 2>&1
+    ./correctReads.sh 20 > ./correctReads.000020.out 2>&1
+    ./correctReads.sh 21 > ./correctReads.000021.out 2>&1
+    ./correctReads.sh 22 > ./correctReads.000022.out 2>&1
+    ./correctReads.sh 23 > ./correctReads.000023.out 2>&1
+    ./correctReads.sh 24 > ./correctReads.000024.out 2>&1
+    ./correctReads.sh 25 > ./correctReads.000025.out 2>&1
+
+-- Finished on Fri Apr 20 04:13:06 2018 (12523 seconds) with 1035.372 GB free disk space
+----------------------------------------
+-- Found 25 read correction output files.
+-- Found 25 read correction output files.
+--
+-- Loading corrected reads into corStore and gkpStore.
+----------------------------------------
+-- Starting command on Fri Apr 20 04:13:06 2018 with 1035.372 GB free disk space
+
+    cd correction
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/loadCorrectedReads \
+      -G ./durian.gkpStore \
+      -C ./durian.corStore \
+      -L ./2-correction/corjob.files \
+    > ./2-correction/corjob.files.load.err 2>&1
+    
+
+-- Finished on Fri Apr 20 04:14:41 2018 (95 seconds) with 1031.13 GB free disk space
+----------------------------------------
+--
+-- In gatekeeper store './durian.gkpStore':
+--   Found 238370 reads.
+--   Found 1788326096 bases (13.97 times coverage).
+--
+--   Read length histogram (one '*' equals 301.62 reads):
+--        0    999    102 
+--     1000   1999  19015 ***************************************************************
+--     2000   2999  20105 ******************************************************************
+--     3000   3999  21114 **********************************************************************
+--     4000   4999  21099 *********************************************************************
+--     5000   5999  19722 *****************************************************************
+--     6000   6999  19457 ****************************************************************
+--     7000   7999  19395 ****************************************************************
+--     8000   8999  19645 *****************************************************************
+--     9000   9999  17856 ***********************************************************
+--    10000  10999  14861 *************************************************
+--    11000  11999  11257 *************************************
+--    12000  12999   8401 ***************************
+--    13000  13999   6413 *********************
+--    14000  14999   4908 ****************
+--    15000  15999   3652 ************
+--    16000  16999   2907 *********
+--    17000  17999   2209 *******
+--    18000  18999   1630 *****
+--    19000  19999   1189 ***
+--    20000  20999    899 **
+--    21000  21999    640 **
+--    22000  22999    496 *
+--    23000  23999    352 *
+--    24000  24999    256 
+--    25000  25999    214 
+--    26000  26999    140 
+--    27000  27999    112 
+--    28000  28999     71 
+--    29000  29999     65 
+--    30000  30999     41 
+--    31000  31999     34 
+--    32000  32999     31 
+--    33000  33999     21 
+--    34000  34999     19 
+--    35000  35999     16 
+--    36000  36999     11 
+--    37000  37999      2 
+--    38000  38999      3 
+--    39000  39999      3 
+--    40000  40999      1 
+--    41000  41999      3 
+--    42000  42999      1 
+--    43000  43999      0 
+--    44000  44999      1 
+--    45000  45999      1 
+--
+-- Purging correctReads output after loading into stores.
+-- Purged 25 .cns outputs.
+-- Purged 50 .out job log outputs.
+--
+-- Purging overlaps used for correction.
+----------------------------------------
+-- Starting command on Fri Apr 20 04:14:52 2018 with 1049.658 GB free disk space
+
+    cd .
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/gatekeeperDumpFASTQ \
+      -corrected \
+      -G ./durian.gkpStore \
+      -o ./durian.correctedReads.gz \
+      -fasta \
+      -nolibname \
+    > durian.correctedReads.fasta.err 2>&1
+
+-- Finished on Fri Apr 20 04:15:31 2018 (39 seconds) with 1049.115 GB free disk space
+----------------------------------------
+--
+-- Corrected reads saved in 'durian.correctedReads.fasta.gz'.
+--
+--
+-- BEGIN TRIMMING
+--
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'meryl' concurrent execution on Fri Apr 20 04:15:31 2018 with 1049.115 GB free disk space (1 processes; 1 concurrently)
+
+    cd trimming/0-mercounts
+    ./meryl.sh 1 > ./meryl.000001.out 2>&1
+
+-- Finished on Fri Apr 20 04:19:42 2018 (251 seconds) with 1045.164 GB free disk space
+----------------------------------------
+-- Meryl finished successfully.
+--
+--  22-mers                                                                                           Fraction
+--    Occurrences   NumMers                                                                         Unique Total
+--       1-     1 654343717 *******************************************************************--> 0.8802 0.3669
+--       2-     2  32420090 ********************************************************************** 0.9238 0.4033
+--       3-     4  18416922 ***************************************                                0.9401 0.4236
+--       5-     7   8754861 ******************                                                     0.9539 0.4489
+--       8-    11   5052837 **********                                                             0.9625 0.4734
+--      12-    16   3895548 ********                                                               0.9684 0.4985
+--      17-    22   4090290 ********                                                               0.9733 0.5294
+--      23-    29   5143187 ***********                                                            0.9788 0.5766
+--      30-    37   5360869 ***********                                                            0.9858 0.6553
+--      38-    46   3426764 *******                                                                0.9927 0.7543
+--      47-    56   1165441 **                                                                     0.9969 0.8276
+--      57-    67    374213                                                                        0.9983 0.8567
+--      68-    79    206761                                                                        0.9987 0.8688
+--      80-    92    136115                                                                        0.9990 0.8770
+--      93-   106     98339                                                                        0.9992 0.8834
+--     107-   121     75653                                                                        0.9993 0.8888
+--     122-   137     60698                                                                        0.9994 0.8935
+--     138-   154     49098                                                                        0.9995 0.8979
+--     155-   172     40806                                                                        0.9996 0.9019
+--     173-   191     30524                                                                        0.9996 0.9056
+--     192-   211     25984                                                                        0.9996 0.9086
+--     212-   232     22759                                                                        0.9997 0.9116
+--     233-   254     20502                                                                        0.9997 0.9144
+--     255-   277     18396                                                                        0.9997 0.9172
+--     278-   301     16803                                                                        0.9998 0.9199
+--     302-   326     15821                                                                        0.9998 0.9226
+--     327-   352     15289                                                                        0.9998 0.9254
+--     353-   379     13801                                                                        0.9998 0.9283
+--     380-   407     13724                                                                        0.9998 0.9312
+--     408-   436     12220                                                                        0.9999 0.9342
+--     437-   466     11029                                                                        0.9999 0.9371
+--     467-   497      9327                                                                        0.9999 0.9398
+--     498-   529      8415                                                                        0.9999 0.9423
+--     530-   562      7655                                                                        0.9999 0.9448
+--     563-   596      7315                                                                        0.9999 0.9471
+--     597-   631      5621                                                                        0.9999 0.9495
+--     632-   667      3523                                                                        0.9999 0.9514
+--     668-   704      2832                                                                        1.0000 0.9526
+--     705-   742      2111                                                                        1.0000 0.9537
+--     743-   781      2397                                                                        1.0000 0.9546
+--     782-   821      1775                                                                        1.0000 0.9556
+--
+--      608077 (max occurrences)
+--  1128976609 (total mers, non-unique)
+--    89063794 (distinct mers, non-unique)
+--   654343717 (unique mers)
+----------------------------------------
+-- Starting command on Fri Apr 20 04:19:42 2018 with 1045.164 GB free disk space
+
+    cd trimming/0-mercounts
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/meryl \
+      -Dt \
+      -n 651 \
+      -s ./durian.ms22 \
+    > ./durian.ms22.frequentMers.fasta \
+    2> ./durian.ms22.frequentMers.fasta.err
+
+-- Finished on Fri Apr 20 04:20:28 2018 (46 seconds) with 1045.163 GB free disk space
+----------------------------------------
+-- Reset obtOvlMerThreshold from auto to 651.
+--
+-- Found 1783320326 22-mers; 743407511 distinct and 654343717 unique.  Largest count 608077.
+--
+-- OVERLAPPER (normal) (trimming) erate=0.045
+--
+----------------------------------------
+-- Starting command on Fri Apr 20 04:20:29 2018 with 1049.113 GB free disk space
+
+    cd trimming/1-overlapper
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/overlapInCorePartition \
+     -G  ../durian.gkpStore \
+     -hl 170624000 \
+     -rl 5000000000 \
+     -ol 500 \
+     -o  ./durian.partition \
+    > ./durian.partition.err 2>&1
+
+-- Finished on Fri Apr 20 04:20:29 2018 (lickety-split) with 1049.113 GB free disk space
+----------------------------------------
+--
+-- Configured 11 overlapInCore jobs.
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'obtovl' concurrent execution on Fri Apr 20 04:20:29 2018 with 1049.113 GB free disk space (11 processes; 4 concurrently)
+
+    cd trimming/1-overlapper
+    ./overlap.sh 1 > ./overlap.000001.out 2>&1
+    ./overlap.sh 2 > ./overlap.000002.out 2>&1
+    ./overlap.sh 3 > ./overlap.000003.out 2>&1
+    ./overlap.sh 4 > ./overlap.000004.out 2>&1
+    ./overlap.sh 5 > ./overlap.000005.out 2>&1
+    ./overlap.sh 6 > ./overlap.000006.out 2>&1
+    ./overlap.sh 7 > ./overlap.000007.out 2>&1
+    ./overlap.sh 8 > ./overlap.000008.out 2>&1
+    ./overlap.sh 9 > ./overlap.000009.out 2>&1
+    ./overlap.sh 10 > ./overlap.000010.out 2>&1
+    ./overlap.sh 11 > ./overlap.000011.out 2>&1
+
+-- Finished on Fri Apr 20 07:23:30 2018 (10981 seconds) with 1048.703 GB free disk space
+----------------------------------------
+-- Found 11 overlapInCore output files.
+--
+-- overlapInCore compute 'trimming/1-overlapper':
+--   kmer hits
+--     with no overlap        566248372  24.7272727 +- 25165024.359
+--     with an overlap         21348174  3.09090909 +- 3499687.861
+--
+--   overlaps                  21347968  4.36363636 +- 3499633.302
+--     contained                      0           0 +- 0
+--     dovetail                       0           0 +- 0
+--
+--   overlaps rejected
+--     multiple per pair              0           0 +- 0
+--     bad short window               0           0 +- 0
+--     bad long window                0           0 +- 0
+----------------------------------------
+-- Starting command on Fri Apr 20 07:23:30 2018 with 1048.703 GB free disk space
+
+    cd trimming
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/ovStoreBuild \
+     -O ./durian.ovlStore.BUILDING \
+     -G ./durian.gkpStore \
+     -M 2-8 \
+     -L ./1-overlapper/ovljob.files \
+     > ./durian.ovlStore.err 2>&1
+
+-- Finished on Fri Apr 20 07:24:11 2018 (41 seconds) with 1047.887 GB free disk space
+----------------------------------------
+-- Checking store.
+----------------------------------------
+-- Starting command on Fri Apr 20 07:24:11 2018 with 1047.887 GB free disk space
+
+    cd trimming
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/ovStoreDump \
+     -G ./durian.gkpStore \
+     -O ./durian.ovlStore \
+     -d -counts \
+     > ./durian.ovlStore/counts.dat 2> ./durian.ovlStore/counts.err
+
+-- Finished on Fri Apr 20 07:24:12 2018 (1 second) with 1047.884 GB free disk space
+----------------------------------------
+--
+-- Overlap store 'trimming/durian.ovlStore' successfully constructed.
+-- Found 42696348 overlaps for 158030 reads; 87420 reads have no overlaps.
+--
+--
+-- Purged 0.409 GB in 33 overlap output files.
+----------------------------------------
+-- Starting command on Fri Apr 20 07:24:12 2018 with 1048.297 GB free disk space
+
+    cd trimming/3-overlapbasedtrimming
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/trimReads \
+      -G  ../durian.gkpStore \
+      -O  ../durian.ovlStore \
+      -Co ./durian.1.trimReads.clear \
+      -e  0.045 \
+      -minlength 1000 \
+      -ol 1 \
+      -oc 1 \
+      -o  ./durian.1.trimReads \
+    >     ./durian.1.trimReads.err 2>&1
+
+-- Finished on Fri Apr 20 07:24:25 2018 (13 seconds) with 1048.279 GB free disk space
+----------------------------------------
+--  PARAMETERS:
+--  ----------
+--     1000    (reads trimmed below this many bases are deleted)
+--   0.0450    (use overlaps at or below this fraction error)
+--        1    (break region if overlap is less than this long, for 'largest covered' algorithm)
+--        1    (break region if overlap coverage is less than this many read, for 'largest covered' algorithm)
+--  
+--  INPUT READS:
+--  -----------
+--  245450 reads   1788326096 bases (reads processed)
+--       0 reads            0 bases (reads not processed, previously deleted)
+--       0 reads            0 bases (reads not processed, in a library where trimming isn't allowed)
+--  
+--  OUTPUT READS:
+--  ------------
+--  145825 reads    987988048 bases (trimmed reads output)
+--    4387 reads     34386638 bases (reads with no change, kept as is)
+--   87420 reads    479171531 bases (reads with no overlaps, deleted)
+--    7818 reads     47343420 bases (reads with short trimmed length, deleted)
+--  
+--  TRIMMING DETAILS:
+--  ----------------
+--  126334 reads    134417374 bases (bases trimmed from the 5' end of a read)
+--  135840 reads    105019085 bases (bases trimmed from the 3' end of a read)
+----------------------------------------
+-- Starting command on Fri Apr 20 07:24:25 2018 with 1048.279 GB free disk space
+
+    cd trimming/3-overlapbasedtrimming
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/splitReads \
+      -G  ../durian.gkpStore \
+      -O  ../durian.ovlStore \
+      -Ci ./durian.1.trimReads.clear \
+      -Co ./durian.2.splitReads.clear \
+      -e  0.045 \
+      -minlength 1000 \
+      -o  ./durian.2.splitReads \
+    >     ./durian.2.splitReads.err 2>&1
+
+-- Finished on Fri Apr 20 07:24:36 2018 (11 seconds) with 1048.277 GB free disk space
+----------------------------------------
+--  PARAMETERS:
+--  ----------
+--     1000    (reads trimmed below this many bases are deleted)
+--   0.0450    (use overlaps at or below this fraction error)
+--  INPUT READS:
+--  -----------
+--  150212 reads   1261811145 bases (reads processed)
+--   95238 reads    526514951 bases (reads not processed, previously deleted)
+--       0 reads            0 bases (reads not processed, in a library where trimming isn't allowed)
+--  
+--  PROCESSED:
+--  --------
+--       0 reads            0 bases (no overlaps)
+--     144 reads      1303570 bases (no coverage after adjusting for trimming done already)
+--       0 reads            0 bases (processed for chimera)
+--       0 reads            0 bases (processed for spur)
+--  150068 reads   1260507575 bases (processed for subreads)
+--  
+--  READS WITH SIGNALS:
+--  ------------------
+--       0 reads            0 signals (number of 5' spur signal)
+--       0 reads            0 signals (number of 3' spur signal)
+--       0 reads            0 signals (number of chimera signal)
+--      55 reads           55 signals (number of subread signal)
+--  
+--  SIGNALS:
+--  -------
+--       0 reads            0 bases (size of 5' spur signal)
+--       0 reads            0 bases (size of 3' spur signal)
+--       0 reads            0 bases (size of chimera signal)
+--      55 reads        23305 bases (size of subread signal)
+--  
+--  TRIMMING:
+--  --------
+--      16 reads        83765 bases (trimmed from the 5' end of the read)
+--      39 reads       175264 bases (trimmed from the 3' end of the read)
+----------------------------------------
+-- Starting command on Fri Apr 20 07:24:36 2018 with 1048.277 GB free disk space
+
+    cd trimming/3-overlapbasedtrimming
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/loadTrimmedReads \
+      -G ../durian.gkpStore \
+      -c ./durian.2.splitReads.clear \
+    > ./durian.loadtrimmedReads.err 2>&1
+
+-- Finished on Fri Apr 20 07:24:37 2018 (1 second) with 1048.277 GB free disk space
+----------------------------------------
+--
+-- In gatekeeper store './durian.gkpStore':
+--   Found 150212 reads.
+--   Found 1022115657 bases (7.98 times coverage).
+--
+--   Read length histogram (one '*' equals 229.6 reads):
+--        0    999      0 
+--     1000   1999  16072 **********************************************************************
+--     2000   2999  13783 ************************************************************
+--     3000   3999  13862 ************************************************************
+--     4000   4999  13994 ************************************************************
+--     5000   5999  13291 *********************************************************
+--     6000   6999  13065 ********************************************************
+--     7000   7999  12696 *******************************************************
+--     8000   8999  12599 ******************************************************
+--     9000   9999  10872 ***********************************************
+--    10000  10999   8415 ************************************
+--    11000  11999   5969 *************************
+--    12000  12999   4294 ******************
+--    13000  13999   3114 *************
+--    14000  14999   2388 **********
+--    15000  15999   1668 *******
+--    16000  16999   1262 *****
+--    17000  17999    911 ***
+--    18000  18999    633 **
+--    19000  19999    427 *
+--    20000  20999    292 *
+--    21000  21999    203 
+--    22000  22999    128 
+--    23000  23999     90 
+--    24000  24999     68 
+--    25000  25999     51 
+--    26000  26999     22 
+--    27000  27999     12 
+--    28000  28999     10 
+--    29000  29999      6 
+--    30000  30999      6 
+--    31000  31999      5 
+--    32000  32999      2 
+--    33000  33999      0 
+--    34000  34999      0 
+--    35000  35999      2 
+--
+-- Overlaps used for trimming saved.
+----------------------------------------
+-- Starting command on Fri Apr 20 07:24:39 2018 with 1048.277 GB free disk space
+
+    cd .
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/gatekeeperDumpFASTQ \
+      -trimmed \
+      -G ./durian.gkpStore \
+      -o ./durian.trimmedReads.gz \
+      -fasta \
+      -nolibname \
+    > ./durian.trimmedReads.fasta.err 2>&1
+
+-- Finished on Fri Apr 20 07:25:01 2018 (22 seconds) with 1047.967 GB free disk space
+----------------------------------------
+--
+-- Trimmed reads saved in 'durian.trimmedReads.fasta.gz'.
+--
+--
+-- BEGIN ASSEMBLY
+--
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'meryl' concurrent execution on Fri Apr 20 07:25:01 2018 with 1047.967 GB free disk space (1 processes; 1 concurrently)
+
+    cd unitigging/0-mercounts
+    ./meryl.sh 1 > ./meryl.000001.out 2>&1
+
+-- Finished on Fri Apr 20 07:26:28 2018 (87 seconds) with 1047.168 GB free disk space
+----------------------------------------
+-- Meryl finished successfully.
+--
+--  22-mers                                                                                           Fraction
+--    Occurrences   NumMers                                                                         Unique Total
+--       1-     1  89085958 *******************************************************************--> 0.6131 0.0874
+--       2-     2  14390496 ********************************************************************** 0.7122 0.1157
+--       3-     4   9794337 ***********************************************                        0.7548 0.1339
+--       5-     7   5688213 ***************************                                            0.7965 0.1601
+--       8-    11   3936672 *******************                                                    0.8268 0.1898
+--      12-    16   3494491 ****************                                                       0.8511 0.2256
+--      17-    22   3945499 *******************                                                    0.8743 0.2752
+--      23-    29   4996603 ************************                                               0.9017 0.3556
+--      30-    37   4998028 ************************                                               0.9363 0.4888
+--      38-    46   2996398 **************                                                         0.9691 0.6490
+--      47-    56    917308 ****                                                                   0.9876 0.7600
+--      57-    67    296632 *                                                                      0.9930 0.7996
+--      68-    79    159293                                                                        0.9949 0.8164
+--      80-    92    102729                                                                        0.9959 0.8274
+--      93-   106     77108                                                                        0.9966 0.8359
+--     107-   121     59449                                                                        0.9971 0.8433
+--     122-   137     45939                                                                        0.9975 0.8498
+--     138-   154     38115                                                                        0.9978 0.8556
+--     155-   172     31058                                                                        0.9981 0.8610
+--     173-   191     23547                                                                        0.9983 0.8659
+--     192-   211     21181                                                                        0.9985 0.8701
+--     212-   232     19060                                                                        0.9986 0.8743
+--     233-   254     17048                                                                        0.9987 0.8784
+--     255-   277     15911                                                                        0.9989 0.8825
+--     278-   301     14567                                                                        0.9990 0.8866
+--     302-   326     13961                                                                        0.9991 0.8907
+--     327-   352     12779                                                                        0.9992 0.8950
+--     353-   379     13163                                                                        0.9993 0.8993
+--     380-   407     11722                                                                        0.9993 0.9040
+--     408-   436     10800                                                                        0.9994 0.9085
+--     437-   466      9196                                                                        0.9995 0.9130
+--     467-   497      8119                                                                        0.9996 0.9170
+--     498-   529      7883                                                                        0.9996 0.9209
+--     530-   562      7104                                                                        0.9997 0.9248
+--     563-   596      5041                                                                        0.9997 0.9286
+--     597-   631      3138                                                                        0.9998 0.9314
+--     632-   667      2196                                                                        0.9998 0.9333
+--     668-   704      2517                                                                        0.9998 0.9347
+--     705-   742      1764                                                                        0.9998 0.9364
+--     743-   781      1501                                                                        0.9998 0.9376
+--     782-   821      1115                                                                        0.9998 0.9388
+--
+--      127460 (max occurrences)
+--   929875247 (total mers, non-unique)
+--    56214727 (distinct mers, non-unique)
+--    89085958 (unique mers)
+----------------------------------------
+-- Starting command on Fri Apr 20 07:26:28 2018 with 1047.168 GB free disk space
+
+    cd unitigging/0-mercounts
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/meryl \
+      -Dt \
+      -n 410 \
+      -s ./durian.ms22 \
+    > ./durian.ms22.frequentMers.fasta \
+    2> ./durian.ms22.frequentMers.fasta.err
+
+-- Finished on Fri Apr 20 07:26:36 2018 (8 seconds) with 1047.166 GB free disk space
+----------------------------------------
+-- Reset utgOvlMerThreshold from auto to 410.
+--
+-- Found 1018961205 22-mers; 145300685 distinct and 89085958 unique.  Largest count 127460.
+--
+-- OVERLAPPER (normal) (assembly) erate=0.045
+--
+----------------------------------------
+-- Starting command on Fri Apr 20 07:26:36 2018 with 1047.964 GB free disk space
+
+    cd unitigging/1-overlapper
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/overlapInCorePartition \
+     -G  ../durian.gkpStore \
+     -hl 170624000 \
+     -rl 5000000000 \
+     -ol 500 \
+     -o  ./durian.partition \
+    > ./durian.partition.err 2>&1
+
+-- Finished on Fri Apr 20 07:26:37 2018 (1 second) with 1047.964 GB free disk space
+----------------------------------------
+--
+-- Configured 6 overlapInCore jobs.
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'utgovl' concurrent execution on Fri Apr 20 07:26:37 2018 with 1047.964 GB free disk space (6 processes; 4 concurrently)
+
+    cd unitigging/1-overlapper
+    ./overlap.sh 1 > ./overlap.000001.out 2>&1
+    ./overlap.sh 2 > ./overlap.000002.out 2>&1
+    ./overlap.sh 3 > ./overlap.000003.out 2>&1
+    ./overlap.sh 4 > ./overlap.000004.out 2>&1
+    ./overlap.sh 5 > ./overlap.000005.out 2>&1
+    ./overlap.sh 6 > ./overlap.000006.out 2>&1
+
+-- Finished on Fri Apr 20 08:54:02 2018 (5245 seconds) with 1047.74 GB free disk space
+----------------------------------------
+-- Found 6 overlapInCore output files.
+--
+-- overlapInCore compute 'unitigging/1-overlapper':
+--   kmer hits
+--     with no overlap        183141082  13.6666667 +- 13942889.641
+--     with an overlap         13154008  4.66666667 +- 2417017.88
+--
+--   overlaps                  13154008  4.66666667 +- 2417017.88
+--     contained                5152960  .666666667 +- 907005.617
+--     dovetail                 8001048     1333508 +- 1511558.195
+--
+--   overlaps rejected
+--     multiple per pair              0           0 +- 0
+--     bad short window               0           0 +- 0
+--     bad long window                0           0 +- 0
+----------------------------------------
+-- Starting command on Fri Apr 20 08:54:02 2018 with 1047.74 GB free disk space
+
+    cd unitigging
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/ovStoreBuild \
+     -O ./durian.ovlStore.BUILDING \
+     -G ./durian.gkpStore \
+     -M 2-8 \
+     -L ./1-overlapper/ovljob.files \
+     > ./durian.ovlStore.err 2>&1
+
+-- Finished on Fri Apr 20 08:54:25 2018 (23 seconds) with 1047.229 GB free disk space
+----------------------------------------
+-- Checking store.
+----------------------------------------
+-- Starting command on Fri Apr 20 08:54:25 2018 with 1047.229 GB free disk space
+
+    cd unitigging
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/ovStoreDump \
+     -G ./durian.gkpStore \
+     -O ./durian.ovlStore \
+     -d -counts \
+     > ./durian.ovlStore/counts.dat 2> ./durian.ovlStore/counts.err
+
+-- Finished on Fri Apr 20 08:54:26 2018 (1 second) with 1047.227 GB free disk space
+----------------------------------------
+--
+-- Overlap store 'unitigging/durian.ovlStore' successfully constructed.
+-- Found 26308016 overlaps for 149600 reads; 95850 reads have no overlaps.
+--
+--
+-- Purged 0.223 GB in 18 overlap output files.
+----------------------------------------
+-- Starting command on Fri Apr 20 08:54:26 2018 with 1047.453 GB free disk space
+
+    cd unitigging
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/ovStoreStats \
+     -G ./durian.gkpStore \
+     -O ./durian.ovlStore \
+     -C 7 \
+     -o ./durian.ovlStore \
+     > ./durian.ovlStore.summary.err 2>&1
+
+-- Finished on Fri Apr 20 08:54:31 2018 (5 seconds) with 1047.449 GB free disk space
+----------------------------------------
+--
+-- Overlap store 'unitigging/durian.ovlStore' contains:
+--
+--   category            reads     %          read length        feature size or coverage  analysis
+--   ----------------  -------  -------  ----------------------  ------------------------  --------------------
+--   middle-missing         56    0.04     6498.30 +- 3726.88        793.64 +- 858.53     (bad trimming)
+--   middle-hump           773    0.51     5317.41 +- 3429.38        115.32 +- 421.17     (bad trimming)
+--   no-5-prime           1368    0.91     6239.98 +- 4091.19        229.01 +- 522.56     (bad trimming)
+--   no-3-prime           1381    0.92     6312.33 +- 4139.12        254.84 +- 538.53     (bad trimming)
+--   
+--   low-coverage         3175    2.11     2439.74 +- 1650.69          1.47 +- 0.50       (easy to assemble, potential for lower quality consensus)
+--   unique               8400    5.59     3454.52 +- 2276.56          6.70 +- 2.28       (easy to assemble, perfect, yay)
+--   repeat-cont        102585   68.29     6675.93 +- 3650.14        210.46 +- 460.51     (potential for consensus errors, no impact on assembly)
+--   repeat-dove          5891    3.92    14263.44 +- 3758.84         39.86 +- 65.25      (hard to assemble, likely won't assemble correctly or even at all)
+--   
+--   span-repeat          4195    2.79     6729.43 +- 3341.98       3675.58 +- 2854.63    (read spans a large repeat, usually easy to assemble)
+--   uniq-repeat-cont    16345   10.88     6475.21 +- 3281.21                             (should be uniquely placed, low potential for consensus errors, no impact on assembly)
+--   uniq-repeat-dove     3239    2.16    11092.95 +- 4272.85                             (will end contigs, potential to misassemble)
+--   uniq-anchor          2192    1.46    10825.30 +- 4155.82       1738.59 +- 1831.83    (repeat read, with unique section, probable bad read)
+--
+-- Loading read lengths.
+-- Loading number of overlaps per read.
+--
+-- Configure RED for 8gb memory.
+--                   Batches of at most (unlimited) reads.
+--                                      500000000 bases.
+--                   Expecting evidence of at most 428403030 bases per iteration.
+--
+--           Total                                               Reads                 Olaps Evidence
+--    Job   Memory      Read Range         Reads        Bases   Memory        Olaps   Memory   Memory  (Memory in MB)
+--   ---- -------- ------------------- --------- ------------ -------- ------------ -------- --------
+--      1  8192.04         1-112696        65332    446819351  5115.50     18475086   211.43   817.11
+--      2  8192.01    112697-219611        68737    459764741  5263.75      5517913    63.15   817.11
+--      3  4214.27    219612-245450        16143    115531565  1322.66      2315017    26.49   817.11
+--   ---- -------- ------------------- --------- ------------ -------- ------------ -------- --------
+--                                                 1022115657              26308016
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'red' concurrent execution on Fri Apr 20 08:54:32 2018 with 1047.449 GB free disk space (3 processes; 5 concurrently)
+
+    cd unitigging/3-overlapErrorAdjustment
+    ./red.sh 1 > ./red.000001.out 2>&1
+    ./red.sh 2 > ./red.000002.out 2>&1
+    ./red.sh 3 > ./red.000003.out 2>&1
+
+-- Finished on Fri Apr 20 09:09:17 2018 (885 seconds) with 1047.423 GB free disk space
+----------------------------------------
+-- Found 3 read error detection output files.
+--
+-- Loading read lengths.
+-- Loading number of overlaps per read.
+--
+-- Configure OEA for 4gb memory.
+--                   Batches of at most (unlimited) reads.
+--                                      300000000 bases.
+--
+--           Total                                               Reads                 Olaps  Adjusts
+--    Job   Memory      Read Range         Reads        Bases   Memory        Olaps   Memory   Memory  (Memory in MB)
+--   ---- -------- ------------------- --------- ------------ -------- ------------ -------- --------
+--      1  3262.25         1-79005         42440    300000574   295.40     17336587   529.07   389.78
+--      2  2811.46     79006-146898        45703    300002001   295.50      2561768    78.18   389.78
+--      3  2856.74    146899-218327        45027    300004036   295.48      4046244   123.48   389.78
+--      4  2634.88    218328-245450        17042    122109046   124.97      2363417    72.13   389.78
+--   ---- -------- ------------------- --------- ------------ -------- ------------ -------- --------
+--                                                 1022115657              26308016
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'oea' concurrent execution on Fri Apr 20 09:09:19 2018 with 1047.423 GB free disk space (4 processes; 20 concurrently)
+
+    cd unitigging/3-overlapErrorAdjustment
+    ./oea.sh 1 > ./oea.000001.out 2>&1
+    ./oea.sh 2 > ./oea.000002.out 2>&1
+    ./oea.sh 3 > ./oea.000003.out 2>&1
+    ./oea.sh 4 > ./oea.000004.out 2>&1
+
+-- Finished on Fri Apr 20 09:48:45 2018 (2366 seconds) with 1047.374 GB free disk space
+----------------------------------------
+-- Found 4 overlap error adjustment output files.
+----------------------------------------
+-- Starting command on Fri Apr 20 09:48:45 2018 with 1047.374 GB free disk space
+
+    cd unitigging/3-overlapErrorAdjustment
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/ovStoreBuild \
+      -G ../durian.gkpStore \
+      -O ../durian.ovlStore \
+      -evalues \
+      -L ./oea.files \
+    > ./oea.apply.err 2>&1
+
+-- Finished on Fri Apr 20 09:48:46 2018 (1 second) with 1047.324 GB free disk space
+----------------------------------------
+-- No report available.
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'bat' concurrent execution on Fri Apr 20 09:48:46 2018 with 1047.324 GB free disk space (1 processes; 1 concurrently)
+
+    cd unitigging/4-unitigger
+    ./unitigger.sh 1 > ./unitigger.000001.out 2>&1
+
+-- Finished on Fri Apr 20 09:49:03 2018 (17 seconds) with 1047.254 GB free disk space
+----------------------------------------
+-- Unitigger finished successfully.
+-- Found, in version 1, after unitig construction:
+--   contigs:      655 sequences, total length 31406098 bp (including 15 repeats of total length 302129 bp).
+--   bubbles:      0 sequences, total length 0 bp.
+--   unassembled:  41673 sequences, total length 218240841 bp.
+--
+-- Contig sizes based on genome size --
+--            NG (bp)  LG (contigs)    sum (bp)
+--         ----------  ------------  ----------
+--     10      381552            17    12953141
+--     20       21750           194    25618086
+--
+----------------------------------------
+-- Starting command on Fri Apr 20 09:49:03 2018 with 1047.254 GB free disk space
+
+    cd unitigging
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/gatekeeperPartition \
+      -G ./durian.gkpStore \
+      -T ./durian.ctgStore 1 \
+      -b 20000 \
+      -p 64 \
+    > ./durian.ctgStore/partitionedReads.log 2>&1
+
+-- Finished on Fri Apr 20 09:49:33 2018 (30 seconds) with 1044.25 GB free disk space
+----------------------------------------
+----------------------------------------
+-- Starting command on Fri Apr 20 09:49:33 2018 with 1044.25 GB free disk space
+
+    cd unitigging
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/gatekeeperPartition \
+      -G ./durian.gkpStore \
+      -T ./durian.utgStore 1 \
+      -b 20000 \
+      -p 64 \
+    > ./durian.utgStore/partitionedReads.log 2>&1
+
+-- Finished on Fri Apr 20 09:49:55 2018 (22 seconds) with 1042.096 GB free disk space
+----------------------------------------
+-- Using slow alignment for consensus (iteration '0').
+-- Configured 9 contig and 6 unitig consensus jobs.
+--
+--                            (tag)Concurrency
+--                     (tag)Threads          |
+--            (tag)Memory         |          |
+--        (tag)         |         |          |     total usage     algorithm
+--        -------  ------  --------   --------  -----------------  -----------------------------
+-- Local: cns        3 GB    5 CPUs x   4 jobs    12 GB   20 CPUs  (consensus)
+--
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'cns' concurrent execution on Fri Apr 20 09:49:55 2018 with 1042.096 GB free disk space (15 processes; 4 concurrently)
+
+    cd unitigging/5-consensus
+    ./consensus.sh 1 > ./consensus.000001.out 2>&1
+    ./consensus.sh 2 > ./consensus.000002.out 2>&1
+    ./consensus.sh 3 > ./consensus.000003.out 2>&1
+    ./consensus.sh 4 > ./consensus.000004.out 2>&1
+    ./consensus.sh 5 > ./consensus.000005.out 2>&1
+    ./consensus.sh 6 > ./consensus.000006.out 2>&1
+    ./consensus.sh 7 > ./consensus.000007.out 2>&1
+    ./consensus.sh 8 > ./consensus.000008.out 2>&1
+    ./consensus.sh 9 > ./consensus.000009.out 2>&1
+    ./consensus.sh 10 > ./consensus.000010.out 2>&1
+    ./consensus.sh 11 > ./consensus.000011.out 2>&1
+    ./consensus.sh 12 > ./consensus.000012.out 2>&1
+    ./consensus.sh 13 > ./consensus.000013.out 2>&1
+    ./consensus.sh 14 > ./consensus.000014.out 2>&1
+    ./consensus.sh 15 > ./consensus.000015.out 2>&1
+
+-- Finished on Fri Apr 20 10:04:00 2018 (845 seconds) with 1041.551 GB free disk space
+----------------------------------------
+-- Using slow alignment for consensus (iteration '1').
+-- Configured 9 contig and 6 unitig consensus jobs.
+-- All 15 consensus jobs finished successfully.
+-- Using slow alignment for consensus (iteration '0').
+-- Configured 9 contig and 6 unitig consensus jobs.
+----------------------------------------
+-- Starting command on Fri Apr 20 10:04:00 2018 with 1041.551 GB free disk space
+
+    cd unitigging
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/tgStoreLoad \
+      -G ./durian.gkpStore \
+      -T ./durian.ctgStore 2 \
+      -L ./5-consensus/ctgcns.files \
+    > ./5-consensus/ctgcns.files.ctgStoreLoad.err 2>&1
+
+-- Finished on Fri Apr 20 10:04:11 2018 (11 seconds) with 1041.075 GB free disk space
+----------------------------------------
+----------------------------------------
+-- Starting command on Fri Apr 20 10:04:11 2018 with 1041.076 GB free disk space
+
+    cd unitigging
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/tgStoreLoad \
+      -G ./durian.gkpStore \
+      -T ./durian.utgStore 2 \
+      -L ./5-consensus/utgcns.files \
+    > ./5-consensus/utgcns.files.utgStoreLoad.err 2>&1
+
+-- Finished on Fri Apr 20 10:04:13 2018 (2 seconds) with 1041.005 GB free disk space
+----------------------------------------
+-- Purging consensus output after loading to ctgStore and/or utgStore.
+-- Purged 15 .cns outputs.
+----------------------------------------
+-- Starting command on Fri Apr 20 10:04:14 2018 with 1046.708 GB free disk space
+
+    cd unitigging
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/tgStoreDump \
+      -G ./durian.gkpStore \
+      -T ./durian.ctgStore 2 \
+      -sizes -s 128000000 \
+    > ./durian.ctgStore/seqDB.v002.sizes.txt
+
+-- Finished on Fri Apr 20 10:04:15 2018 (1 second) with 1046.707 GB free disk space
+----------------------------------------
+-- Found, in version 2, after consensus generation:
+--   contigs:      655 sequences, total length 31329483 bp (including 15 repeats of total length 300118 bp).
+--   bubbles:      0 sequences, total length 0 bp.
+--   unassembled:  41673 sequences, total length 218239332 bp.
+--
+-- Contig sizes based on genome size --
+--            NG (bp)  LG (contigs)    sum (bp)
+--         ----------  ------------  ----------
+--     10      380629            17    12912616
+--     20       21475           197    25619269
+--
+----------------------------------------
+-- Starting command on Fri Apr 20 10:04:15 2018 with 1046.707 GB free disk space
+
+    cd unitigging
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/tgStoreCoverageStat \
+      -G ./durian.gkpStore \
+      -T ./durian.ctgStore 2 \
+      -s 128000000 \
+      -o ./durian.ctgStore.coverageStat \
+    > ./durian.ctgStore.coverageStat.err 2>&1
+
+-- Finished on Fri Apr 20 10:04:16 2018 (1 second) with 1046.706 GB free disk space
+----------------------------------------
+--
+-- Running jobs.  First attempt out of 2.
+----------------------------------------
+-- Starting 'gfa' concurrent execution on Fri Apr 20 10:04:16 2018 with 1046.706 GB free disk space (1 processes; 1 concurrently)
+
+    cd unitigging/4-unitigger
+    ./alignGFA.sh 1 > ./alignGFA.000001.out 2>&1
+
+-- Finished on Fri Apr 20 10:04:38 2018 (22 seconds) with 1046.705 GB free disk space
+----------------------------------------
+----------------------------------------
+-- Starting command on Fri Apr 20 10:04:38 2018 with 1046.705 GB free disk space
+
+    cd .
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/tgStoreDump \
+      -G ./unitigging/durian.gkpStore \
+      -T ./unitigging/durian.ctgStore 2 \
+      -o ./durian.contigs \
+      -layout \
+    > ./durian.contigs.layout.err 2>&1
+
+-- Finished on Fri Apr 20 10:04:44 2018 (6 seconds) with 1046.214 GB free disk space
+----------------------------------------
+----------------------------------------
+-- Starting command on Fri Apr 20 10:04:44 2018 with 1046.214 GB free disk space
+
+    cd .
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/tgStoreDump \
+      -G ./unitigging/durian.gkpStore \
+      -T ./unitigging/durian.utgStore 2 \
+      -o ./durian.unitigs \
+      -layout \
+    > ./durian.unitigs.layout.err 2>&1
+
+-- Finished on Fri Apr 20 10:04:45 2018 (1 second) with 1046.137 GB free disk space
+----------------------------------------
+----------------------------------------
+-- Starting command on Fri Apr 20 10:04:45 2018 with 1046.137 GB free disk space
+
+    cd .
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/tgStoreDump \
+      -G ./unitigging/durian.gkpStore \
+      -T ./unitigging/durian.ctgStore 2 \
+      -consensus -fasta \
+      -unassembled \
+    > ./durian.unassembled.fasta
+    2> ./durian.unassembled.err
+
+-- Finished on Fri Apr 20 10:04:49 2018 (4 seconds) with 1045.928 GB free disk space
+----------------------------------------
+----------------------------------------
+-- Starting command on Fri Apr 20 10:04:49 2018 with 1045.928 GB free disk space
+
+    cd .
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/tgStoreDump \
+      -G ./unitigging/durian.gkpStore \
+      -T ./unitigging/durian.ctgStore 2 \
+      -consensus -fasta \
+      -contigs \
+    > ./durian.contigs.fasta
+    2> ./durian.contigs.err
+
+-- Finished on Fri Apr 20 10:04:51 2018 (2 seconds) with 1045.898 GB free disk space
+----------------------------------------
+----------------------------------------
+-- Starting command on Fri Apr 20 10:04:51 2018 with 1045.898 GB free disk space
+
+    cd .
+    /sw/apps/bioinfo/canu/1.7/rackham/Linux-amd64/bin/tgStoreDump \
+      -G ./unitigging/durian.gkpStore \
+      -T ./unitigging/durian.utgStore 2 \
+      -consensus -fasta \
+      -contigs \
+    > ./durian.unitigs.fasta
+    2> ./durian.unitigs.err
+
+-- Finished on Fri Apr 20 10:04:51 2018 (lickety-split) with 1045.865 GB free disk space
+----------------------------------------
+--
+-- Assembly 'durian' finished in '/pica/h1/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio'.
+--
+-- Summary saved in 'durian.report'.
+--
+-- Sequences saved:
+--   Contigs       -> 'durian.contigs.fasta'
+--   Unassembled   -> 'durian.unassembled.fasta'
+--   Unitigs       -> 'durian.unitigs.fasta'
+--
+-- Read layouts saved:
+--   Contigs       -> 'durian.contigs.layout'.
+--   Unitigs       -> 'durian.unitigs.layout'.
+--
+-- Graphs saved:
+--   Contigs       -> 'durian.contigs.gfa'.
+--   Unitigs       -> 'durian.unitigs.gfa'.
+--
+-- Bye.

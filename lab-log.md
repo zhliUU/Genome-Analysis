@@ -1,24 +1,32 @@
 ## 17th Apr:
 
- **X** Install DESeq2
+##### **X** Install DESeq2
 
-**X** Fix git ignore for .DS_Store and data folder
+##### **X** Fix git ignore for .DS_Store and data folder
 
-**X** Folder structure /data and each step folder:
+##### **X** Folder structure /data and each step folder:
 
 ​     data will be placed in data folder with symbolic link
 
-**x**Prepare script
+##### **X** Prepare script
 
-**TODO**Try fastQC locally and understand the output
+##### **TODO** Try fastQC locally and understand the output
 
 ## 19th Apr:
 
-Submit the PacBio read assembly successfully
+##### **(kindof)**Submit the PacBio read assembly successfully
 
-Understand the output of fastQC
+##### Understand the output of fastQC and discuss about it
 
-Make script for BWA
+In per base sequence quality for 11.1, it has bad quality in 100 end, need trimmed.
+
+*when running the fastqc as sbatch job, it return error at some point, stopping the echo "unzipping"
+
+For RNA reads, in Per base sequence content and Per sequence GC content bad behaviors could come from the transtomic are over representative sequence or from pollution, it might be okey when the evaluation is "**worning**"
+
+##### Run trimmomatic for scaffold_11.1.fastq
+
+##### Make script for BWA
 
 
 

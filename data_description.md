@@ -2,13 +2,13 @@
 
 ## DNA (WGS_trimmed_data)
 
-| File name                       | Size  | Platform | Detail                                            |                                                           |
-| ------------------------------- | ----- | -------- | ------------------------------------------------- | --------------------------------------------------------- |
-| SRR6037732_scaffold_11.fq       | 1534M | PacBio   | Musang King fruit stalk (D1)                      | https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR6037732 |
-| SRR6058604_scaffold_11.1P.fastq | 313M  | Illumina | Musang King fruit stalk (D1): Forward paired read | https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR6058604 |
-| SRR6058604_scaffold_11.1U.fastq | 1M    | Illumina | Forward unique reads                              |                                                           |
-| SRR6058604_scaffold_11.2P.fastq | 338M  | Illumina | Reverse paired read                               |                                                           |
-| SRR6058604_scaffold_11.2U.fastq | 1M    | Illumina | Reverse unique reads                              |                                                           |
+| File name                       | Size             | Platform | Detail                                            |                                                           |
+| ------------------------------- | ---------------- | -------- | ------------------------------------------------- | --------------------------------------------------------- |
+| SRR6037732_scaffold_11.fq       | 1534M            | PacBio   | Musang King fruit stalk (D1)                      | https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR6037732 |
+| SRR6058604_scaffold_11.1P.fastq | 313M  length=151 | Illumina | Musang King fruit stalk (D1): Forward paired read | https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR6058604 |
+| SRR6058604_scaffold_11.1U.fastq | 1M               | Illumina | Forward unique reads                              |                                                           |
+| SRR6058604_scaffold_11.2P.fastq | 338M             | Illumina | Reverse paired read                               |                                                           |
+| SRR6058604_scaffold_11.2U.fastq | 1M               | Illumina | Reverse unique reads                              |                                                           |
 
 ## RNA raw data
 

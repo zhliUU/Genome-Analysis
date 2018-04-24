@@ -14,7 +14,7 @@
 
 ## 19th Apr:
 
-##### **(kindof)**Submit the PacBio read assembly successfully
+##### Submit the PacBio read assembly successfully
 
 ##### Understand the output of fastQC and discuss about it
 
@@ -24,9 +24,11 @@ In per base sequence quality for 11.1, it has bad quality in 100 end, need trimm
 
 For RNA reads, in Per base sequence content and Per sequence GC content bad behaviors could come from the transtomic are over representative sequence or from pollution, it might be okey when the evaluation is "**worning**"
 
+## 24th Apr:
+
 ##### Run trimmomatic for scaffold_11.1.fastq
 
-##### Make script for BWA
+##### Make script for BWA （BWA-MEM）
 
 
 

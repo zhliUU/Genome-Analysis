@@ -38,3 +38,34 @@
 | SRR6156069_scaffold_11.1.fastq | 65M  | Illumina | Monthong: aril 1    |                                                           |
 | SRR6156069_scaffold_11.2.fastq | 59M  | Illumina | Monthong: aril 1    |                                                           |
 
+## Output of 01_PacBio_genome_assembly
+
+--Summary saved in 'durian.report'.
+
+\--
+
+--Sequences saved:
+
+--   Contigs      -> 'durian.contigs.fasta'
+
+--   Unassembled  -> 'durian.unassembled.fasta'
+
+--   Unitigs      -> 'durian.unitigs.fasta'
+
+\--
+
+--Read layouts saved:
+
+--   Contigs      -> 'durian.contigs.layout'.
+
+--   Unitigs      -> 'durian.unitigs.layout'.
+
+\--
+
+--Graphs saved:
+
+--   Contigs      -> 'durian.contigs.gfa'.
+
+--   Unitigs      -> 'durian.unitigs.gfa'.
+
+## Output of 02_RNA_rawData_QC

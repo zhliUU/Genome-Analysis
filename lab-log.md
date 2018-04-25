@@ -24,7 +24,7 @@ In per base sequence quality for 11.1, it has bad quality in 100 end, need trimm
 
 For RNA reads, in Per base sequence content and Per sequence GC content bad behaviors could come from the transtomic are over representative sequence or from pollution, it might be okey when the evaluation is "**worning**"
 
-## 24th Apr:
+## 24th&25th Apr:
 
 ##### Run trimmomatic for scaffold_11.1.fastq
 

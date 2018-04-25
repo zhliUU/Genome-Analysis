@@ -1,0 +1,24 @@
+All statistics are based on contigs of size >= 500 bp, unless otherwise noted (e.g., "# contigs (>= 0 bp)" and "Total length (>= 0 bp)" include all contigs).
+
+Assembly                    durian.contigs
+# contigs (>= 0 bp)         655           
+# contigs (>= 1000 bp)      655           
+# contigs (>= 5000 bp)      634           
+# contigs (>= 10000 bp)     497           
+# contigs (>= 25000 bp)     157           
+# contigs (>= 50000 bp)     81            
+Total length (>= 0 bp)      31329483      
+Total length (>= 1000 bp)   31329483      
+Total length (>= 5000 bp)   31267062      
+Total length (>= 10000 bp)  30151981      
+Total length (>= 25000 bp)  24695069      
+Total length (>= 50000 bp)  22082948      
+# contigs                   655           
+Largest contig              2182527       
+Total length                31329483      
+GC (%)                      31.03         
+N50                         286878        
+N75                         33649         
+L50                         26            
+L75                         116           
+# N's per 100 kbp           0.00          

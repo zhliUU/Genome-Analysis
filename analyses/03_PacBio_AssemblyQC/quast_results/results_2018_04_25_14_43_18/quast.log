@@ -1,0 +1,61 @@
+/sw/apps/bioinfo/quast/4.5.4/rackham/bin/quast.py /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio/durian.contigs.fasta
+
+Version: 4.5.4
+
+System information:
+  OS: Linux-3.10.0-693.21.1.el7.x86_64-x86_64-with-centos-7.4.1708-Core (linux_64)
+  Python version: 2.7.6
+  CPUs number: 20
+
+Started: 2018-04-25 14:43:18
+
+Logging to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/quast.log
+NOTICE: Maximum number of threads is set to 5 (use --threads option to set it manually)
+
+CWD: /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC
+Main parameters: 
+  Threads: 5, minimum contig length: 500, ambiguity: one, threshold for extensive misassembly size: 1000
+
+Contigs:
+  Pre-processing...
+  /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio/durian.contigs.fasta ==> durian.contigs
+
+2018-04-25 14:43:21
+Running Basic statistics processor...
+  Contig files: 
+    durian.contigs
+  Calculating N50 and L50...
+    durian.contigs, N50 = 286878, L50 = 26, Total length = 31329483, GC % = 31.03, # N's per 100 kbp =  0.00
+  Drawing Nx plot...
+    saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/basic_stats/Nx_plot.pdf
+  Drawing cumulative plot...
+    saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/basic_stats/cumulative_plot.pdf
+  Drawing GC content plot...
+    saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/basic_stats/GC_content_plot.pdf
+  Drawing durian.contigs GC content plot...
+    saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/basic_stats/durian.contigs_GC_content_plot.pdf
+Done.
+
+NOTICE: Genes are not predicted by default. Use --gene-finding option to enable it.
+
+2018-04-25 14:43:25
+Creating large visual summaries...
+This may take a while: press Ctrl-C to skip this step..
+  1 of 2: Creating Icarus viewers...
+  2 of 2: Creating PDF with all tables and plots...
+Done
+
+2018-04-25 14:43:26
+RESULTS:
+  Text versions of total report are saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/report.txt, report.tsv, and report.tex
+  Text versions of transposed total report are saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/transposed_report.txt, transposed_report.tsv, and transposed_report.tex
+  HTML version (interactive tables and plots) saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/report.html
+  PDF version (tables and plots) is saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/report.pdf
+  Icarus (contig browser) is saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/icarus.html
+  Log saved to /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_14_43_18/quast.log
+
+Finished: 2018-04-25 14:43:26
+Elapsed time: 0:00:07.906986
+NOTICEs: 2; WARNINGs: 0; non-fatal ERRORs: 0
+
+Thank you for using QUAST!

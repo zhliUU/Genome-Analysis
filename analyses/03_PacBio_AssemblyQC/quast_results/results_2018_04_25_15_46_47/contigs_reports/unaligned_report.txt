@@ -1,0 +1,8 @@
+All statistics are based on contigs of size >= 500 bp, unless otherwise noted (e.g., "# contigs (>= 0 bp)" and "Total length (>= 0 bp)" include all contigs).
+
+Assembly                       durian.contigs
+# fully unaligned contigs      283           
+Fully unaligned length         3830612       
+# partially unaligned contigs  189           
+Partially unaligned length     1868959       
+# N's                          0             

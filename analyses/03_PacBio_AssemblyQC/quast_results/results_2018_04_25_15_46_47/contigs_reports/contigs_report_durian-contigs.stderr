@@ -1,0 +1,5 @@
+Writing filtered delta file /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_15_46_47/contigs_reports/nucmer_output/durian-contigs.filter
+Reading delta file /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_15_46_47/contigs_reports/nucmer_output/durian-contigs.delta
+Writing plot files /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_15_46_47/contigs_reports/nucmer_output/durian-contigs.fplot, /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_15_46_47/contigs_reports/nucmer_output/durian-contigs.rplot
+Writing gnuplot script /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_15_46_47/contigs_reports/nucmer_output/durian-contigs.gp
+Rendering plot /pica/h1/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC/quast_results/results_2018_04_25_15_46_47/contigs_reports/nucmer_output/durian-contigs.html

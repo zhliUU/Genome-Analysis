@@ -1,0 +1,16 @@
+All statistics are based on contigs of size >= 500 bp, unless otherwise noted (e.g., "# contigs (>= 0 bp)" and "Total length (>= 0 bp)" include all contigs).
+
+Assembly                     durian.contigs
+# misassemblies              165           
+    # relocations            164           
+    # translocations         0             
+    # inversions             1             
+# misassembled contigs       102           
+Misassembled contigs length  15039921      
+# local misassemblies        227           
+# unaligned mis. contigs     8             
+# mismatches                 78547         
+# indels                     45900         
+    # indels (<= 5 bp)       43990         
+    # indels (> 5 bp)        1910          
+Indels length                81352         

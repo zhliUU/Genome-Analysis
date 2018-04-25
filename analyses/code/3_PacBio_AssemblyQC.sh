@@ -12,7 +12,7 @@
 module load bioinfo-tools
 module load quast
 
-# Your commands
+# Your commands: It wasn't run through bash, but command line directly
 quast.py /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio/durian.contigs.fasta
 output=/home/zhiwei94/Genome-Analysis/analyses/03_PacBio_AssemblyQC #TODO: locate the data correctly
 touch repoerForPacBioQC

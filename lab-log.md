@@ -28,6 +28,8 @@ For RNA reads, in Per base sequence content and Per sequence GC content bad beha
 
 ##### Run trimmomatic for scaffold_11.1.fastq
 
+assembly evaluation fro PicBio assembly using Quast
+
 ##### Make script for BWA （BWA-MEM）
 
 

@@ -4,5 +4,5 @@ analyses/data/RNA_trimmed_data/
 analyses/data/WGS_trimmed_data/
 
 # ./analyses/01_PacBio_genome_assembly #
-./analyses/01_PacBio_genome_assembly/
+./analyses/01_PacBio_genome_assembly/*
 !/analyses/01_PacBio_genome_assembly/durian-pacbio/durian.report

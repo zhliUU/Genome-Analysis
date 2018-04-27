@@ -1,4 +1,4 @@
-# Paper 5: Durian genome analyses
+# Paper 5: Durian(Durio zibethinus) genome analyses
 
 ## 1. Aim of the project.
 

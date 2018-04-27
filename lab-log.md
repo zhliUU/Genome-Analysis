@@ -30,9 +30,13 @@ For RNA reads, in Per base sequence content and Per sequence GC content bad beha
 
 ##### Assembly evaluation fro PicBio assembly using Quast
 
-evaluating the QC report:
+evaluating the QC report: bad quality, move to using the genome from author
 
-##### Make script for BWA （BWA-MEM）
+##### Make script for BWA （BWA-MEM）(skip due to bad quality)
+
+##### Trimmomatic
+
+##### Tophat run in loop
 
 
 

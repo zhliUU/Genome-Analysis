@@ -38,7 +38,7 @@ evaluating the QC report: bad quality, move to using the genome from author
 
 ##### Tophat run in loop
 
-
+Tophat shouldn't run in the data directory: permission denied
 
 
 

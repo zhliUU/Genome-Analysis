@@ -15,8 +15,8 @@ module load tophat
 forword=$1
 reverse=$2
 
-tophat /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/durio_zibe/ \
--o /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA \
+tophat -o /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA \
 -p 2 \
+/home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/durio_zibe/05_Tophat_Mapping_RNA \
 $forword $reverse
 done

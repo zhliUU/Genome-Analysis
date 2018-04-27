@@ -34,6 +34,8 @@ evaluating the QC report: bad quality, move to using the genome from author
 
 ##### Make script for BWA （BWA-MEM）(skip due to bad quality)
 
+## 27th
+
 ##### Trimmomatic
 
 ##### Tophat run in loop

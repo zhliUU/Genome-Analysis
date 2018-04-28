@@ -11,6 +11,7 @@
 # Load modules
 module load bioinfo-tools
 module load bowtie
+module load bowtie2
 module load tophat
 
 forword=$1
@@ -22,4 +23,3 @@ tophat -o /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/sample${
 -p 2 \
 /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/durio_zibe/05_Tophat_Mapping_RNA \
 $forword $reverse
-done

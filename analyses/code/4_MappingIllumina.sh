@@ -12,6 +12,7 @@
 module load bioinfo-tools
 module load bwa
 #TODO: create pipeline to convert sam to bam file as input for Pilon.
+#TODO: For the first run, the input RNA reads are not trimmed!!
 # check if works with compressed data; check Input: bwa mem ref.fa read1.fq read2.fq > aln-pe.sam
 bwa index /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio/durian.contigs.fasta
 bwa mem /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio/durian.contigs.fasta \

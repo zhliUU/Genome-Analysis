@@ -12,7 +12,7 @@
 module load bioinfo-tools
 module load Pilon
 
-java -jar $PILON_HOME/pilon.jar -genome /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio/durian.contigs.fasta \
---bam /home/zhiwei94/Genome-Analysis/analyses/04_Mapping_PacBio_Assembly_Illumina/aln-pe.sam \
+java -jar $PILON_HOME/pilon.jar --genome /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio/durian.contigs.fasta \
+--bam /home/zhiwei94/Genome-Analysis/analyses/04_Mapping_PacBio_Assembly_Illumina/aln-pe.bam \
 --threads 2 --output Durio_zibe_PilonPolished \
 --outdir /home/zhiwei94/Genome-Analysis/analyses/07_Pilon_polish/

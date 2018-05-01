@@ -1,0 +1,5 @@
+Writing filtered delta file /pica/h1/zhiwei94/Genome-Analysis/analyses/07_Pilon_polish/quast_results/results_2018_05_01_20_05_10/contigs_reports/nucmer_output/Durio_zibe_PilonPolished.filter
+Reading delta file /pica/h1/zhiwei94/Genome-Analysis/analyses/07_Pilon_polish/quast_results/results_2018_05_01_20_05_10/contigs_reports/nucmer_output/Durio_zibe_PilonPolished.delta
+Writing plot files /pica/h1/zhiwei94/Genome-Analysis/analyses/07_Pilon_polish/quast_results/results_2018_05_01_20_05_10/contigs_reports/nucmer_output/Durio_zibe_PilonPolished.fplot, /pica/h1/zhiwei94/Genome-Analysis/analyses/07_Pilon_polish/quast_results/results_2018_05_01_20_05_10/contigs_reports/nucmer_output/Durio_zibe_PilonPolished.rplot
+Writing gnuplot script /pica/h1/zhiwei94/Genome-Analysis/analyses/07_Pilon_polish/quast_results/results_2018_05_01_20_05_10/contigs_reports/nucmer_output/Durio_zibe_PilonPolished.gp
+Rendering plot /pica/h1/zhiwei94/Genome-Analysis/analyses/07_Pilon_polish/quast_results/results_2018_05_01_20_05_10/contigs_reports/nucmer_output/Durio_zibe_PilonPolished.html

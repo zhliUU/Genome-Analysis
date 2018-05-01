@@ -1,0 +1,49 @@
+Assembly	Durio_zibe_PilonPolished
+# contigs (>= 0 bp)	655
+# contigs (>= 1000 bp)	655
+# contigs (>= 5000 bp)	634
+# contigs (>= 10000 bp)	497
+# contigs (>= 25000 bp)	157
+# contigs (>= 50000 bp)	81
+Total length (>= 0 bp)	31333134
+Total length (>= 1000 bp)	31333134
+Total length (>= 5000 bp)	31270716
+Total length (>= 10000 bp)	30154949
+Total length (>= 25000 bp)	24695717
+Total length (>= 50000 bp)	22084286
+# contigs	655
+Largest contig	2182778
+Total length	31333134
+Reference length	23775123
+GC (%)	31.05
+Reference GC (%)	30.18
+N50	287196
+NG50	412228
+N75	33670
+NG75	162939
+L50	26
+LG50	15
+L75	116
+LG75	36
+# misassemblies	171
+# misassembled contigs	102
+Misassembled contigs length	15257209
+# local misassemblies	233
+# unaligned mis. contigs	7
+# unaligned contigs	286 + 186 part
+Unaligned length	5731771
+Genome fraction (%)	94.671
+Duplication ratio	1.137
+# N's per 100 kbp	0.00
+# mismatches per 100 kbp	305.20
+# indels per 100 kbp	133.12
+Largest alignment	2007280
+Total aligned length	25587050
+NA50	125398
+NGA50	265789
+NA75	16179
+NGA75	96962
+LA50	46
+LGA50	25
+LA75	225
+LGA75	65

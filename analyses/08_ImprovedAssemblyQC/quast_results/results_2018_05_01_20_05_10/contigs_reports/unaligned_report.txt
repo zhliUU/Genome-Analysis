@@ -1,0 +1,8 @@
+All statistics are based on contigs of size >= 500 bp, unless otherwise noted (e.g., "# contigs (>= 0 bp)" and "Total length (>= 0 bp)" include all contigs).
+
+Assembly                       Durio_zibe_PilonPolished
+# fully unaligned contigs      286                     
+Fully unaligned length         3883912                 
+# partially unaligned contigs  186                     
+Partially unaligned length     1847859                 
+# N's                          0                       

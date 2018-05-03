@@ -1,0 +1,22 @@
+
+[2018-04-27 17:38:55] Beginning TopHat run (v2.1.1)
+-----------------------------------------------
+[2018-04-27 17:38:55] Checking for Bowtie
+		  Bowtie version:	 2.3.3.1
+[2018-04-27 17:38:55] Checking for Bowtie index files (genome)..
+[2018-04-27 17:38:55] Checking for reference FASTA file
+[2018-04-27 17:38:55] Generating SAM header for /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/durio_zibe/05_Tophat_Mapping_RNA
+[2018-04-27 17:38:56] Preparing reads
+	 left reads: min. length=50, max. length=101, 507696 kept reads (23 discarded)
+	right reads: min. length=50, max. length=101, 507719 kept reads (0 discarded)
+[2018-04-27 17:39:18] Mapping left_kept_reads to genome 05_Tophat_Mapping_RNA with Bowtie2 
+[2018-04-27 17:40:32] Mapping left_kept_reads_seg1 to genome 05_Tophat_Mapping_RNA with Bowtie2 (1/4)
+[2018-04-27 17:40:37] Mapping left_kept_reads_seg2 to genome 05_Tophat_Mapping_RNA with Bowtie2 (2/4)
+[2018-04-27 17:40:43] Mapping left_kept_reads_seg3 to genome 05_Tophat_Mapping_RNA with Bowtie2 (3/4)
+[2018-04-27 17:40:49] Mapping left_kept_reads_seg4 to genome 05_Tophat_Mapping_RNA with Bowtie2 (4/4)
+[2018-04-27 17:40:56] Mapping right_kept_reads to genome 05_Tophat_Mapping_RNA with Bowtie2 
+	[FAILED]
+Error running:
+/sw/apps/bioinfo/tophat/2.1.1/milou/bin/bam2fastx --all /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/sample40097_out/tmp/right_kept_reads.bam|/sw/apps/bioinfo/bowtie2/2.3.3.1/rackham/bin/bowtie2 -k 20 -D 15 -R 2 -N 0 -L 20 -i S,1,1.25 --gbar 4 --mp 6,2 --np 1 --rdg 5,3 --rfg 5,3 --score-min C,-14,0 -p 2 --sam-no-hd -x /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/durio_zibe/05_Tophat_Mapping_RNA -|/sw/apps/bioinfo/tophat/2.1.1/milou/bin/fix_map_ordering --bowtie2-min-score 15 --read-mismatches 2 --read-gap-length 2 --read-edit-dist 2 --read-realign-edit-dist 3 --index-outfile /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/sample40097_out/tmp/right_kept_reads.mapped.bam.index --sam-header /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/sample40097_out/tmp/05_Tophat_Mapping_RNA_genome.bwt.samheader.sam - /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/sample40097_out/tmp/right_kept_reads.mapped.bam /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/sample40097_out/tmp/right_kept_reads_unmapped.bam
+/var/spool/slurmd/job2869801/slurm_script: line 24: syntax error near unexpected token `done'
+/var/spool/slurmd/job2869801/slurm_script: line 24: `done'

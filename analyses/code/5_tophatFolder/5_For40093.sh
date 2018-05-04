@@ -13,10 +13,6 @@ module load bioinfo-tools
 module load bowtie2
 module load tophat
 
-#forword=/home/zhiwei94/Genome-Analysis/analyses/data/RNA_trimmed_data/SRR6040093_scaffold_11.1.fastq.gz
-#reverse=/home/zhiwei94/Genome-Analysis/analyses/data/RNA_trimmed_data/SRR6040093_scaffold_11.2.fastq.gz
-#SAMPLE_ID=40093
-
 #test ID
 #mkdir /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/sample${SAMPLE_ID}
 tophat -o /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/TophatSample40093 \

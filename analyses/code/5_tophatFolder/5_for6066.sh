@@ -18,5 +18,5 @@ module load tophat
 tophat -o /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/TophatSample6066 \
 -p 2 \
 /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/durio_zibe/05_Tophat_Mapping_RNA \
- home/zhiwei94/Genome-Analysis/analyses/data/RNA_trimmed_data/SRR6156066_scaffold_11.1.fastq.gz \
- home/zhiwei94/Genome-Analysis/analyses/data/RNA_trimmed_data/SRR6156066_scaffold_11.2.fastq.gz
+ /home/zhiwei94/Genome-Analysis/analyses/data/RNA_trimmed_data/SRR6156066_scaffold_11.1.fastq.gz \
+ /home/zhiwei94/Genome-Analysis/analyses/data/RNA_trimmed_data/SRR6156066_scaffold_11.2.fastq.gz

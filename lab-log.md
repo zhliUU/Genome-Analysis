@@ -40,7 +40,7 @@ evaluating the QC report: bad quality, move to using the genome from author
 
 ##### Tophat run in loop
 
-Tophat shouldn't run in the data directory: permission denied
+Tophat shouldn't run in the data directory: permission denied.
 
 ## 29th
 
@@ -50,7 +50,9 @@ Trimmomatic, trim the RNA_raw seq
 
 Tophat in loop maynot be getting the files path correctly, I created specific batch file for each job.
 
-For trinity I will use the BAM file from trinity directly
+For trinity I will use the BAM file from trinity directly (merge selection of BAMs files)
+
+
 
 
 

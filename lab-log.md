@@ -46,6 +46,12 @@ Tophat shouldn't run in the data directory: permission denied
 
 Trimmomatic, trim the RNA_raw seq
 
+## 4th May
+
+Tophat in loop maynot be getting the files path correctly, I created specific batch file for each job.
+
+For trinity I will use the BAM file from trinity directly
+
 
 
 

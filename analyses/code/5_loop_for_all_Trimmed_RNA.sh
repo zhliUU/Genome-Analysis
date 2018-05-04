@@ -18,7 +18,7 @@ for SAMPLE_ID in "${array[@]}"；
 do
 # ls SRR604009[2-7]_scaffold_11.1.fastq.gz
 ls ${read_PATH}${SAMPLE_ID}_scaffold_11.1.fastq.gz \
-| while read forward; do echo $forward; \
+| while read forward; \ #do echo $forward; \
 reverse=$(echo $forward|sed 's/1.fastq.gz$/2.fastq.gz/');\
 echo $reverse; echo submitting job for ${SAMPLE_ID}...;
 #echo make sure to enable the sbatch function and check the output folder

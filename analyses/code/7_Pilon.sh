@@ -11,7 +11,7 @@
 # Load modules
 module load bioinfo-tools
 module load Pilon
-
+#samtools sort AND index were used to close the error of Pilon
 java -jar $PILON_HOME/pilon.jar --genome /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian-pacbio/durian.contigs.fasta \
 --bam /home/zhiwei94/Genome-Analysis/analyses/04_Mapping_PacBio_Assembly_Illumina/aln-pSorted.bam \
 --threads 2 --output Durio_zibe_PilonPolished \

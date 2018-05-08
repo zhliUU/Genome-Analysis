@@ -52,6 +52,14 @@ Tophat in loop maynot be getting the files path correctly, I created specific ba
 
 For trinity I will use the BAM file from trinity directly (merge selection of BAMs files)
 
+## 8th May
+
+download relatedness protein in FASTA format
+
+First step for maker pipeline
+
+QC for trinity assembly?
+
 
 
 

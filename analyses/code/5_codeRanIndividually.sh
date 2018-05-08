@@ -1,3 +1,6 @@
+# build index
+# bowtie2-build sequence.fasta /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/05_Tophat_Mapping_RNA
+
 tophat -o /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/sampleFor97 \
 -p 2 \
 /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/durio_zibe/05_Tophat_Mapping_RNA \

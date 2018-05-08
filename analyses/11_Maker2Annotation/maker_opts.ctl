@@ -1,5 +1,5 @@
 #-----Genome (these are always required)
-genome= #genome sequence (fasta file or fasta embeded in GFF3 file)
+genome=/home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/contig_download/sequence.fasta #genome sequence (fasta file or fasta embeded in GFF3 file)
 organism_type=eukaryotic #eukaryotic or prokaryotic. Default is eukaryotic
 
 #-----Re-annotation Using MAKER Derived GFF3
@@ -13,13 +13,13 @@ pred_pass=0 #use ab-initio predictions in maker_gff: 1 = yes, 0 = no
 other_pass=0 #passthrough anyything else in maker_gff: 1 = yes, 0 = no
 
 #-----EST Evidence (for best results provide a file for at least one)
-est= #set of ESTs or assembled mRNA-seq in fasta format
+est=/home/zhiwei94/Genome-Analysis/analyses/11_Maker2Annotation/Trinity-GG.fasta #set of ESTs or assembled mRNA-seq in fasta format
 altest= #EST/cDNA sequence file in fasta format from an alternate organism
 est_gff= #aligned ESTs or mRNA-seq from an external GFF3 file
 altest_gff= #aligned ESTs from a closly relate species in GFF3 format
 
 #-----Protein Homology Evidence (for best results provide a file for at least one)
-protein=  #protein sequence file in fasta format (i.e. from mutiple organisms)
+protein=/home/zhiwei94/Genome-Analysis/analyses/11_Maker2Annotation/Relatedness.fasta  #protein sequence file in fasta format (i.e. from mutiple organisms)
 protein_gff=  #aligned protein homology evidence from an external GFF3 file
 
 #-----Repeat Masking (leave values blank to skip repeat masking)
@@ -38,8 +38,8 @@ fgenesh_par_file= #FGENESH parameter file
 pred_gff= #ab-initio predictions from an external GFF3 file
 model_gff= #annotated gene models from an external GFF3 file (annotation pass-through)
 run_evm=0 #run EvidenceModeler, 1 = yes, 0 = no
-est2genome=0 #infer gene predictions directly from ESTs, 1 = yes, 0 = no
-protein2genome=0 #infer predictions from protein homology, 1 = yes, 0 = no
+est2genome=1 #infer gene predictions directly from ESTs, 1 = yes, 0 = no
+protein2genome=1 #infer predictions from protein homology, 1 = yes, 0 = no
 trna=0 #find tRNAs with tRNAscan, 1 = yes, 0 = no
 snoscan_rrna= #rRNA file to have Snoscan find snoRNAs
 snoscan_meth= #-O-methylation site fileto have Snoscan find snoRNAs

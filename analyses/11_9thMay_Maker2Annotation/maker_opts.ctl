@@ -1,5 +1,5 @@
 #-----Genome (these are always required)
-genome=genome=/home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/contig_download/sequence.fasta #genome sequence (fasta file or fasta embeded in GFF3 file)
+genome=/home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/contig_download/sequence.fasta #genome sequence (fasta file or fasta embeded in GFF3 file)
 organism_type=eukaryotic #eukaryotic or prokaryotic. Default is eukaryotic
 
 #-----Re-annotation Using MAKER Derived GFF3

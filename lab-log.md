@@ -60,7 +60,9 @@ First step for maker pipeline
 
 QC for trinity assembly?
 
+## 9th May
 
+May need to increase the core to speed up maker2 run.
 
 
 

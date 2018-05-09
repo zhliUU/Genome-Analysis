@@ -34,8 +34,56 @@
 
   for forward reads, the per base sequence quality session, for position 90~97 their lower whiskers are in the red zone(calls of poor quality) as shown in the figure below. We have to trim the RNA raw data.![image-20180509113452921](/var/folders/f3/9n5djfxd7bbbhpxt8ngx5xp40000gn/T/abnerworks.Typora/image-20180509113452921.png)
 
-  ?The quality of calls on most platforms will degrade as the run progresses, so it is common to see base calls falling into the orange area towards the end of a read.?
+  For RNA reads, in Per base sequence content and Per sequence GC content bad behaviors could come from the transtomic are over representative sequence or from pollution, it might be okey when the evaluation is "**worning**" 
 
--   What can generate the issues you observe in your data? Can these cause any 
+  ??Kmer content indicates that the begining part has low quality.
+
+- What can generate the issues you observe in your data? Can these cause any 
 
   problems during subsequent analyses? 
+
+  
+
+## Reads preprocessing 
+
+- \-  How many reads have been discarded after trimming? 
+
+  1494547-1493963=584
+
+- \-  How can this affect your future analyses and results? 
+
+  Extra time when running Tophat, lower quality?
+
+- \-  How is the quality of your data after trimming? 
+
+  Still complaining about kmer content, may need to change the parameters.
+
+- \-  What do the LEADING, TRAILING and SLIDINGWINDOW options do? 
+
+  - SLIDINGWINDOW: Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold.
+  - LEADING: Cut bases off the start of a read, if below a threshold quality
+  - TRAILING: Cut bases off the end of a read, if below a threshold quality
+
+## Genome assembly
+
+- \-  What information can you get from the plots and reports given by the assembler (if you get any)? 
+
+- \-  What intermediate steps generate informative output about the assembly? 
+
+- \-  How many contigs do you expect? How many do you obtain? 
+
+- \-  What is the difference between a ‘contig’ and a ‘unitig’? 
+
+  Contigs, split at alternate paths in the graph
+
+- \-  What is the difference between a ‘contig’ and a ‘scaffold’? 
+
+- \-  What are the kmers? What kmer(s) should you use? What are the problems and benefits of choosing a small kmer? And a big kmer? 
+
+- \-  Some assemblers can include a read-correction step before doing the assembly. What is this step doing? 
+
+- \-  How different do different assemblers perform for the same data? 
+
+- \-  Can you see any other letter appart from AGTC in your assembly? If so, what are 
+
+  those? 

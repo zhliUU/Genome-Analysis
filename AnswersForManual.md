@@ -22,7 +22,7 @@
 
   The quality in coded in ASCII and '!' stands for lowest '~' stands for the highest.
 
-  ```shell
+  ```scheme
   !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
   ```
 

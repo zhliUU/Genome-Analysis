@@ -36,11 +36,13 @@
 
   For RNA reads, in Per base sequence content and Per sequence GC content bad behaviors could come from the transtomic are over representative sequence or from pollution, it might be okey when the evaluation is "**worning**" 
 
-  ??Kmer content indicates that the begining part has low quality.
+  ??Kmer content indicates that the begining part has low quality. ===> trim more?
 
-- What can generate the issues you observe in your data? Can these cause any 
+- \- What can generate the issues you observe in your data? Can these cause any 
 
   problems during subsequent analyses? 
+
+  - Libraries which derive from random priming will nearly always show Kmer bias at the start of the library due to an incomplete sampling of the possible random primers.
 
   
 
@@ -48,7 +50,7 @@
 
 - \-  How many reads have been discarded after trimming? 
 
-  1494547-1493963=584
+  1494547-1493963=584 (for illumina RNA reads, DNA reads are all trimmed.)
 
 - \-  How can this affect your future analyses and results? 
 
@@ -56,7 +58,7 @@
 
 - \-  How is the quality of your data after trimming? 
 
-  Still complaining about kmer content, may need to change the parameters.
+  In fastQC, Still complaining about kmer content, may need to change the parameters.
 
 - \-  What do the LEADING, TRAILING and SLIDINGWINDOW options do? 
 
@@ -67,6 +69,8 @@
 ## Genome assembly
 
 - \-  What information can you get from the plots and reports given by the assembler (if you get any)? 
+
+  ![Screen Shot 2018-05-14 at 5.04.03 PM](/Users/apple/Desktop/Screen Shot 2018-05-14 at 5.04.03 PM.png)
 
 - \-  What intermediate steps generate informative output about the assembly? 
 
@@ -84,6 +88,10 @@
 
 - \-  How different do different assemblers perform for the same data? 
 
+  Not sure. Check lecture slides.
+
 - \-  Can you see any other letter appart from AGTC in your assembly? If so, what are 
 
   those? 
+
+  N: unsure?

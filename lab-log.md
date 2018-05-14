@@ -64,7 +64,19 @@ QC for trinity assembly?
 
 May need to increase the core to speed up maker2 run.
 
+To define the cores used, it also required to define when running maker:
 
+```shell
+maker -c 4 -q
+```
+
+## 14th May
+
+Run maker step 7 with arabidopsis directly from step 1. 
+
+Start EggNOG mapper.
+
+Documentation
 
 
 

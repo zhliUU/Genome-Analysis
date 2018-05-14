@@ -10,6 +10,6 @@
 
 # Load modules
 module load bioinfo-tools
-module load maker/3.01.1-beta
-
-maker -c 8 -q
+module load GeneMark/4.33-es
+#TODO: change the parameters, -fungus is incorrect
+gmes_petap.pl -ES -fungus -cores 10 -sequence /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/contig_download/sequence.fasta

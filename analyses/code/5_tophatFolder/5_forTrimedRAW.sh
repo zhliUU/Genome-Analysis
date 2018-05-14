@@ -15,7 +15,7 @@ module load tophat
 
 #test ID
 #mkdir /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/sample${SAMPLE_ID}
-tophat -o /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/TophatSample40095TrimmedRAW \
+tophat -o /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/NewTestTophatSample40095TrimmedRAW \
 -p 2 \
 /home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/durio_zibe/05_Tophat_Mapping_RNA \
  /home/zhiwei94/Genome-Analysis/analyses/06_Trimmomatic_RNA_raw/output_forward_paired.fq \

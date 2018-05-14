@@ -2,8 +2,8 @@
 
 #SBATCH -A g2018003
 #SBATCH -p core
-#SBATCH -n 4
-#SBATCH -t 10:00:00
+#SBATCH -n 8
+#SBATCH -t 48:00:00
 #SBATCH -J 11_Maker
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user li120415323@gmail.com
@@ -12,4 +12,4 @@
 module load bioinfo-tools
 module load maker/3.01.1-beta
 
-maker
+maker -c 8 -q

@@ -27,7 +27,7 @@ No reads quality control and reads preprocessing since we are working with PacBi
 | 9. Two iterations Annotation (structural)!!!first structural then functional!!! |          Eukaryotes          |                            Maker2                            |     UPPMAX      | **Two iterations 6,12h(long) (4 cores)** | (Input: assembly trinity output and relatedness protein)     |
 | 10. Read counting                                            |        Count features        |                            HTSeq                             |     UPPMAX      |                    ~                     |                                                              |
 | 11.Differential Expression                                   |          Comparison          | (input:  																										HTSeq) DESeq2 (R library) | Locally, UPPMAX |                 Variable                 |                                                              |
-| 12. Visualization of the genome                              | Reads and genomic annotation | ( input:																										EggNOGmapper) IGV |     Locally     |                 Variable                 |                                                              |
+| 12. Visualization of the genome                              | Reads and genomic annotation | ( input:																										EggNOGmapper) IGV |     Locally     |                 Variable                 | genome, .Gff, bam(one of each, then add more)                |
 
 ### Basic analyses:
 

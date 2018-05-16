@@ -19,3 +19,6 @@ bwa mem /home/zhiwei94/Genome-Analysis/analyses/01_PacBio_genome_assembly/durian
  /home/zhiwei94/Genome-Analysis/analyses/data/WGS_trimmed_data/SRR6058604_scaffold_11.1P.fastq.gz \
 /home/zhiwei94/Genome-Analysis/analyses/data/WGS_trimmed_data/SRR6058604_scaffold_11.2P.fastq.gz \
 > /home/zhiwei94/Genome-Analysis/analyses/04_Mapping_PacBio_Assembly_Illumina/aln-pe.sam
+
+#Convert from sam to bam:
+#samtools view -S -b aln-pe.sam > aln-pe.bam

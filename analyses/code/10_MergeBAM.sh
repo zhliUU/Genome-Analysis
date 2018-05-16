@@ -2,6 +2,7 @@
 
 #using 40095 40092 40093 40096, excluded: Monthong
 #load samtools
+module load bioinfo-tools
 module load samtools
 #run concatenation
 #it was run in the analyses directory, path to output not clear.
@@ -31,3 +32,15 @@ samtools merge 10_MergeBAM/ALLmerge/ALLout.bam \
 #sort the BAM by name
 samtools sort -n ALLout.bam > sorted-ALLout.bam
 #TODO: need index?
+
+samtools sort -n accepted_hits.bam > SortAccepted.bam
+NewTestTophatSample40095TrimmedRAW #donn't use
+TophatSample40092
+TophatSample40093
+TophatSample40094
+TophatSample40095TrimmedRAW
+TophatSample40096
+TophatSample40097
+TophatSample6066
+TophatSample6067
+TophatSample6069

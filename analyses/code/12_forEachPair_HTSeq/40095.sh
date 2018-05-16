@@ -12,6 +12,6 @@ module load bioinfo-tools
 module load htseq/0.9.1
 
 python -m HTSeq.scripts.count -f bam -r name -t CDS -i ID \
-/home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/TophatSample40095/SortAccepted.bam \
+/home/zhiwei94/Genome-Analysis/analyses/05_Tophat_Mapping_RNA/TophatSample40095TrimmedRAW/SortAccepted.bam \
 /home/zhiwei94/Genome-Analysis/analyses/11_Output/test.gff\
 > /home/zhiwei94/Genome-Analysis/analyses/12_HTseq/40095counts.file

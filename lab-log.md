@@ -74,11 +74,24 @@ maker -c 4 -q
 
 Run maker step 7 with arabidopsis directly from step 1. 
 
-Start EggNOG mapper.
-
 Documentation
 
+## 16th May
 
+Run HTseq:
+
+```shell
+[zhiwei94@r34 11_Output]$ module load bioinfo-tools
+[zhiwei94@r34 11_Output]$ module load htseq
+[zhiwei94@r34 11_Output]$ python -m HTSeq.scripts.count
+usage: count.py [options] alignment_file gff_file
+count.py: error: too few arguments
+#help
+python -m HTSeq.scripts.count -h
+python -m HTSeq.scripts.count -f bam -r name  -o HTseqCountOut\
+/home/zhiwei94/Genome-Analysis/analyses/10_MergeBAM/ALLmerge/ALLout.bam \
+XXX.gff
+```
 
 
 

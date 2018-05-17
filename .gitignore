@@ -6,4 +6,4 @@ analyses/data/WGS_trimmed_data/
 # ./analyses/01_PacBio_genome_assembly #
 analyses/01_PacBio_genome_assembly/*
 !analyses/01_PacBio_genome_assembly/durian-pacbio/durian.report
-analyses/05_Tophat_Mapping_RNA/
+#analyses/05_Tophat_Mapping_RNA/

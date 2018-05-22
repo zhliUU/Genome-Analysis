@@ -1,14 +1,14 @@
 ## 17th Apr:
 
-##### **X** Install DESeq2
+##### Install DESeq2.
 
-##### **X** Fix git ignore for .DS_Store and data folder
+##### Fix git ignore for .DS_Store and data folder.
 
-##### **X** Folder structure /data and each step folder:
+##### Folder structure /data and each step folder:
 
 ​     data will be placed in data folder with symbolic link
 
-##### **X** Prepare script
+##### Prepare script for Canu(PacBio reads assembly)
 
 ##### **TODO** Try fastQC locally and understand the output
 
@@ -18,21 +18,23 @@
 
 ##### Understand the output of fastQC and discuss about it
 
-In per base sequence quality for 11.1, it has bad quality in 100 end, need trimmed.
+##### In per base sequence quality for 11.1, it has bad quality in 100 end, need trimmed.
 
-*when running the fastqc as sbatch job, it return error at some point, stopping the echo "unzipping"
+(*when running the fastqc as sbatch job, it return error at some point, stopping the echo "unzipping")
 
-For RNA reads, in Per base sequence content and Per sequence GC content bad behaviors could come from the transtomic are over representative sequence or from pollution, it might be okey when the evaluation is "**worning**"
+For RNA reads, in Per base sequence content and Per sequence GC content bad behaviors could come from the transtomic are over **representative sequence** or from pollution, it might be okey when the evaluation is still "**worning**".
 
 ## 24th&25th Apr:
 
-##### Run trimmomatic for scaffold_11.1.fastq
+##### Run trimmomatic for DNA raw reads.
 
-##### Assembly evaluation fro PicBio assembly using Quast
+##### Assembly evaluation fro PicBio assembly using Quast.
 
-evaluating the QC report: bad quality, move to using the genome from author
+Evaluating the QC report: bad quality, move to using the genome from author.
 
-##### Make script for BWA （BWA-MEM）(skip due to bad quality)
+(https://www.ncbi.nlm.nih.gov/Traces/wgs/?val=NSDW01#contigs *scaffold 11)
+
+##### Make script for BWA (BWA-MEM)
 
 ## 27th
 
@@ -40,17 +42,21 @@ evaluating the QC report: bad quality, move to using the genome from author
 
 ##### Tophat run in loop
 
-Tophat shouldn't run in the data directory: permission denied.
-
 ## 29th
 
-Trimmomatic, trim the RNA_raw seq
+##### Trimmomatic, trim the RNA_raw seq
 
 ## 4th May
 
-Tophat in loop maynot be getting the files path correctly, I created specific batch file for each job.
+##### Tophat in loop maynot be getting the files path correctly, I created specific batch file for each job.
 
-For trinity I will use the BAM file from trinity directly (merge selection of BAMs files)
+Solved by running Tophat for each pair of RNA reads in terminal manually.
+
+For trinity, use the BAM file from Tophat directly (merge selection of BAMs files).
+
+##### Pilon for PacBio assembly reads improvement.
+
+
 
 ## 8th May
 
@@ -80,18 +86,14 @@ Documentation
 
 Run HTseq:
 
-```shell
-[zhiwei94@r34 11_Output]$ module load bioinfo-tools
-[zhiwei94@r34 11_Output]$ module load htseq
-[zhiwei94@r34 11_Output]$ python -m HTSeq.scripts.count
-usage: count.py [options] alignment_file gff_file
-count.py: error: too few arguments
-#help
-python -m HTSeq.scripts.count -h
-python -m HTSeq.scripts.count -f bam -r name  -o HTseqCountOut\
-/home/zhiwei94/Genome-Analysis/analyses/10_MergeBAM/ALLmerge/ALLout.bam \
-XXX.gff
-```
+EggNOGmapper
 
+## 17th May
 
+##### DESeq2
 
+##### IGV
+
+## 22th May
+
+Finish DEseq, IGV, Biological interpretation.

@@ -33,7 +33,7 @@
 | SRR6040097_scaffold_11.2.fastq | 37M  | Illumina | Musang King: aril 3 |                                                           |
 | SRR6156066_scaffold_11.1fastq  | 57M  | Illumina | Monthong: aril 2    |                                                           |
 | SRR6156066_scaffold_11.2.fastq | 78M  | Illumina | Monthong: aril 2    |                                                           |
-| SRR6156067_scaffold_11.1.fastq | 42M  | Illumina | Monthong: aril 3    |                                                           |
+| SRR6156067_scaffold_11.1.fastq | 42M  | Illumina | Monthong: aril 3]   |                                                           |
 | SRR6156067_scaffold_11.2.fastq | 41M  | Illumina | Monthong: aril 3    |                                                           |
 | SRR6156069_scaffold_11.1.fastq | 65M  | Illumina | Monthong: aril 1    |                                                           |
 | SRR6156069_scaffold_11.2.fastq | 59M  | Illumina | Monthong: aril 1    |                                                           |

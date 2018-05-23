@@ -78,7 +78,7 @@ maker -c 4 -q
 
 ## 14th May
 
-Run maker step 7 with arabidopsis directly from step 1. 
+Run maker step 7 with arabidopsis directly from step 2. 
 
 Documentation
 

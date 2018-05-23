@@ -1,0 +1,1104 @@
+
+R version 3.4.4 (2018-03-15) -- "Someone to Lean On"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+During startup - Warning messages:
+1: Setting LC_CTYPE failed, using "C" 
+2: Setting LC_COLLATE failed, using "C" 
+3: Setting LC_TIME failed, using "C" 
+4: Setting LC_MESSAGES failed, using "C" 
+5: Setting LC_MONETARY failed, using "C" 
+[R.app GUI 1.70 (7507) x86_64-apple-darwin15.6.0]
+
+WARNING: You're using a non-UTF8 locale, therefore only ASCII characters will work.
+Please read R for Mac OS X FAQ (see Help) section 9 and adjust your system preferences accordingly.
+[History restored from /Users/apple/.Rapp.history]
+
+Empty environment, nothing to do!
+> getwd() 
+[1] "/Users/apple"
+> setwd("/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq")
+> # Load DESeq2 library
+> library("DESeq2")
+Loading required package: S4Vectors
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: 'BiocGenerics'
+
+The following objects are masked from 'package:parallel':
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ, clusterExport,
+    clusterMap, parApply, parCapply, parLapply, parLapplyLB, parRapply,
+    parSapply, parSapplyLB
+
+The following objects are masked from 'package:stats':
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from 'package:base':
+
+    Filter, Find, Map, Position, Reduce, anyDuplicated, append, as.data.frame,
+    cbind, colMeans, colSums, colnames, do.call, duplicated, eval, evalq, get,
+    grep, grepl, intersect, is.unsorted, lapply, lengths, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, rank, rbind, rowMeans,
+    rowSums, rownames, sapply, setdiff, sort, table, tapply, union, unique,
+    unsplit, which, which.max, which.min
+
+
+Attaching package: 'S4Vectors'
+
+The following object is masked from 'package:base':
+
+    expand.grid
+
+Loading required package: IRanges
+Loading required package: GenomicRanges
+Loading required package: GenomeInfoDb
+Loading required package: SummarizedExperiment
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with 'browseVignettes()'. To
+    cite Bioconductor, see 'citation("Biobase")', and for packages
+    'citation("pkgname")'.
+
+Loading required package: DelayedArray
+Loading required package: matrixStats
+
+Attaching package: 'matrixStats'
+
+The following objects are masked from 'package:Biobase':
+
+    anyMissing, rowMedians
+
+
+Attaching package: 'DelayedArray'
+
+The following objects are masked from 'package:matrixStats':
+
+    colMaxs, colMins, colRanges, rowMaxs, rowMins, rowRanges
+
+The following object is masked from 'package:base':
+
+    apply
+
+> outputPrefix <- "Gmax_DESeq2"
+> sampleFiles<- c("40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",)
+Error in c("40092counts.file", "40092counts.file", "40092counts.file",  : 
+  argument 7 is empty
+> sampleFiles<- c("40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",)
+Error in c("40092counts.file", "40092counts.file", "40092counts.file",  : 
+  argument 7 is empty
+> sampleFiles<- c("40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",
++                 "40092counts.file",\)
+Error: unexpected input in:
+"                "40092counts.file",
+                "40092counts.file",\"
+> sampleFiles<- c("40092counts.file",
++                 "40093counts.file",
++                 "40094counts.file",
++                 "40095counts.file",
++                 "40096counts.file",
++                 "40097counts.file")
+> sampleNames <- c("MK leaf", "MK root", "MK aril2", "MK aril1", "MK stem", "MK aril3")
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles)
+> directory <- "Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> colnames(sampleFiles)
+NULL
+> ddsHTSeq <- ESeqDataSetFromHTSeqCount(sampleTable = sampleTable,)
+Error in ESeqDataSetFromHTSeqCount(sampleTable = sampleTable, ) : 
+  could not find function "ESeqDataSetFromHTSeqCount"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,)
+Error in DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, ) : 
+  design is missing
+objc[12378]: Class FIFinderSyncExtensionHost is implemented in both /System/Library/PrivateFrameworks/FinderKit.framework/Versions/A/FinderKit (0x7fffa3c0bc90) and /System/Library/PrivateFrameworks/FileProvider.framework/OverrideBundles/FinderSyncCollaborationFileProviderOverride.bundle/Contents/MacOS/FinderSyncCollaborationFileProviderOverride (0x10f99bcd8). One of the two will be used. Which one is undefined.
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~condition)
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq/40092counts.file': No such file or directory
+> directory <- "Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~condition)
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq/40092counts.file': No such file or directory
+> 
+> getwd()
+[1] "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> sampleFiles
+[1] "40092counts.file" "40093counts.file" "40094counts.file" "40095counts.file"
+[5] "40096counts.file" "40097counts.file"
+> sampleNames
+[1] "MK leaf"  "MK root"  "MK aril2" "MK aril1" "MK stem"  "MK aril3"
+> sampleTable
+  sampleName         fileName
+1    MK leaf 40092counts.file
+2    MK root 40093counts.file
+3   MK aril2 40094counts.file
+4   MK aril1 40095counts.file
+5    MK stem 40096counts.file
+6   MK aril3 40097counts.file
+> directory
+[1] "Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq
+Error: object 'ddsHTSeq' not found
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~condition)
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq/40092counts.file': No such file or directory
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~condition)
+Error in DESeqDataSet(se, design = design, ignoreRank) : 
+  all variables in design formula must be columns in colData
+> colData
+standardGeneric for "colData" defined from package "SummarizedExperiment"
+
+function (x, ...) 
+standardGeneric("colData")
+<environment: 0x7ff351bedfc8>
+Methods may be defined for arguments: x
+Use  showMethods("colData")  for currently available ones.
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~sampleName)
+Error in DESeqDataSet(se, design = design, ignoreRank) : 
+  all variables in design formula must be columns in colData
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = sampleName)
+Error in all.vars(design) : object 'sampleName' not found
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~sampleNames)
+Error in DESeqDataSet(se, design = design, ignoreRank) : 
+  all variables in design formula must be columns in colData
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = sampleNames)
+Error: $ operator is invalid for atomic vectors
+> design?
++ 
+> ?design
+starting httpd help server ... done
+> ddsHTSeq
+Error: object 'ddsHTSeq' not found
+> sampleNames <- c("MK leaf", "MK root", "MK aril2", "MK aril1", "MK stem", "MK aril3")
+> sampleTissue <- c("leaf", "root", "aril", "aril", "stem", "aril")
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~Tissue)
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq/40092counts.file': No such file or directory
+> 
+> sampleNames <- c("MK leaf", "MK root", "MK aril2", "MK aril1", "MK stem", "MK aril3")
+> sampleTissue <- c("leaf", "root", "aril", "aril", "stem", "aril")
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~Tissue)
+> ddsHTSeq
+class: DESeqDataSet 
+dim: 1990 6 
+metadata(1): version
+assays(1): counts
+rownames(1990): augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds
+  augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds ...
+  augustus_masked-NSDW01000011.1-processed-gene-98.3-mRNA-1:cds
+  augustus_masked-NSDW01000011.1-processed-gene-99.0-mRNA-1:cds
+rowData names(0):
+colnames(6): MK leaf MK root ... MK stem MK aril3
+colData names(1): Tissue
+> ddsHTSeq$colData
+NULL
+> sampleTable
+  sampleName         fileName Tissue
+1    MK leaf 40092counts.file   leaf
+2    MK root 40093counts.file   root
+3   MK aril2 40094counts.file   aril
+4   MK aril1 40095counts.file   aril
+5    MK stem 40096counts.file   stem
+6   MK aril3 40097counts.file   aril
+> #guts
+> dds <- DESeq(ddsHTSeq)
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+> res <- results(dds)
+> 
+> res
+log2 fold change (MLE): Tissue stem vs aril 
+Wald test p-value: Tissue stem vs aril 
+DataFrame with 1990 rows and 6 columns
+                                                                baseMean log2FoldChange
+                                                               <numeric>      <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds    3.339773      -5.404536
+augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds    3.798248      -2.487229
+augustus_masked-NSDW01000011.1-processed-gene-1.1-mRNA-1:cds    1.081678      -4.113336
+augustus_masked-NSDW01000011.1-processed-gene-1.2-mRNA-1:cds    4.043014      -5.559680
+augustus_masked-NSDW01000011.1-processed-gene-1.3-mRNA-1:cds    7.088833      -6.801013
+...                                                                  ...            ...
+augustus_masked-NSDW01000011.1-processed-gene-98.0-mRNA-1:cds  0.9000158    -3.79347634
+augustus_masked-NSDW01000011.1-processed-gene-98.1-mRNA-1:cds  1.2351441    -4.11335363
+augustus_masked-NSDW01000011.1-processed-gene-98.2-mRNA-1:cds  6.1016069    -0.09387951
+augustus_masked-NSDW01000011.1-processed-gene-98.3-mRNA-1:cds 10.1856555     0.11459625
+augustus_masked-NSDW01000011.1-processed-gene-99.0-mRNA-1:cds 12.6702472    -5.19294808
+                                                                  lfcSE        stat
+                                                              <numeric>   <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds   4.603024  -1.1741272
+augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds   3.778576  -0.6582450
+augustus_masked-NSDW01000011.1-processed-gene-1.1-mRNA-1:cds   5.689589  -0.7229583
+augustus_masked-NSDW01000011.1-processed-gene-1.2-mRNA-1:cds   4.301672  -1.2924464
+augustus_masked-NSDW01000011.1-processed-gene-1.3-mRNA-1:cds   3.705959  -1.8351559
+...                                                                 ...         ...
+augustus_masked-NSDW01000011.1-processed-gene-98.0-mRNA-1:cds  5.699598 -0.66556911
+augustus_masked-NSDW01000011.1-processed-gene-98.1-mRNA-1:cds  5.689589 -0.72296151
+augustus_masked-NSDW01000011.1-processed-gene-98.2-mRNA-1:cds  3.059611 -0.03068348
+augustus_masked-NSDW01000011.1-processed-gene-98.3-mRNA-1:cds  2.644304  0.04333702
+augustus_masked-NSDW01000011.1-processed-gene-99.0-mRNA-1:cds  2.920189 -1.77829170
+                                                                  pvalue      padj
+                                                               <numeric> <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds   0.2403441        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds   0.5103807        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.1-mRNA-1:cds   0.4697055        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.2-mRNA-1:cds   0.1962026        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.3-mRNA-1:cds   0.0664826        NA
+...                                                                  ...       ...
+augustus_masked-NSDW01000011.1-processed-gene-98.0-mRNA-1:cds 0.50568656        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.1-mRNA-1:cds 0.46970353        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.2-mRNA-1:cds 0.97552197        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.3-mRNA-1:cds 0.96543288        NA
+augustus_masked-NSDW01000011.1-processed-gene-99.0-mRNA-1:cds 0.07535596        NA
+> treatments = c("leaf", "root")
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
++                                       levels = treatments)
+> 
+> 
+> 
+> #guts
+> dds <- DESeq(ddsHTSeq)
+Error in designAndArgChecker(object, betaPrior) : 
+  variables in the design formula cannot have NA values
+> res <- results(dds)
+> sampleNames <- c("MK leaf", "MK root", "MK aril2", "MK aril1", "MK stem", "MK aril3")
+> sampleTissue <- c("leaf", "root", "aril", "aril", "stem", "aril")
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~Tissue)
+> treatments = c("leaf", "root")
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
++                                       levels = treatments)
+> dds <- DESeq(ddsHTSeq)
+Error in designAndArgChecker(object, betaPrior) : 
+  variables in the design formula cannot have NA values
+> res <- results(dds)
+> sampleTissue <- c("leaf", "root", "aril", "aril", "stem", "aril")
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~ Tissue)
+> treatments = c("leaf", "root")
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
++                                       levels = treatments)
+> dds <- DESeq(ddsHTSeq)
+Error in designAndArgChecker(object, betaPrior) : 
+  variables in the design formula cannot have NA values
+> sampleFiles<- c("40092counts.file",
++                  "40093counts.file")
+> sampleNames <- c("MK leaf", "MK root")
+> sampleTissue <- c("leaf", "root")
+> 
+> 
+> 
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~ Tissue)
+> treatments = c("leaf", "root")
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
++                                       levels = treatments)
+> #guts
+> dds <- DESeq(ddsHTSeq)
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+Warning message:
+In checkForExperimentalReplicates(object, modelMatrix) :
+  same number of samples and coefficients to fit,
+  estimating dispersion by treating samples as replicates.
+  please read the ?DESeq section on 'Experiments without replicates'.
+  in summary: this analysis only potentially useful for data exploration,
+  accurate differential expression analysis requires replication
+> res <- results(dds)
+> res
+log2 fold change (MLE): Tissue root vs leaf 
+Wald test p-value: Tissue root vs leaf 
+DataFrame with 1990 rows and 6 columns
+                                                               baseMean log2FoldChange     lfcSE        stat    pvalue      padj
+                                                              <numeric>      <numeric> <numeric>   <numeric> <numeric> <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds  3.4577435     1.23778391  3.707494  0.33385995 0.7384852 0.9990088
+augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds  1.0004251    -0.08413034  6.409261 -0.01312637 0.9895270 0.9990088
+augustus_masked-NSDW01000011.1-processed-gene-1.1-mRNA-1:cds  0.4856311     2.35838753  6.918507  0.34088101 0.7331932 0.9990088
+augustus_masked-NSDW01000011.1-processed-gene-1.2-mRNA-1:cds  4.8854738     3.08575281  3.501465  0.88127491 0.3781690 0.9990088
+augustus_masked-NSDW01000011.1-processed-gene-1.3-mRNA-1:cds  3.4577435     1.23778391  3.707494  0.33385995 0.7384852 0.9990088
+...                                                                 ...            ...       ...         ...       ...       ...
+augustus_masked-NSDW01000011.1-processed-gene-98.0-mRNA-1:cds 0.5147941    -2.52670778  6.918522 -0.36520921 0.7149552 0.9990088
+augustus_masked-NSDW01000011.1-processed-gene-98.1-mRNA-1:cds 1.0004251    -0.08413034  6.409261 -0.01312637 0.9895270 0.9990088
+augustus_masked-NSDW01000011.1-processed-gene-98.2-mRNA-1:cds 6.6048339    -1.82107205  2.877994 -0.63275741 0.5268921 0.9990088
+augustus_masked-NSDW01000011.1-processed-gene-98.3-mRNA-1:cds 8.0325642    -0.44669135  2.563501 -0.17425051 0.8616686 0.9990088
+augustus_masked-NSDW01000011.1-processed-gene-99.0-mRNA-1:cds 5.9733879     0.40129883  2.892439  0.13874064 0.8896551 0.9990088
+> # order results by padj value (most significant to least)
+> res= subset(res, padj<0.05)
+> res <- res[order(res$padj),]
+> res
+log2 fold change (MLE): Tissue root vs leaf 
+Wald test p-value: Tissue root vs leaf 
+DataFrame with 0 rows and 6 columns
+> res= subset(res, padj<0.50)
+> res <- res[order(res$padj),]
+> res
+log2 fold change (MLE): Tissue root vs leaf 
+Wald test p-value: Tissue root vs leaf 
+DataFrame with 0 rows and 6 columns
+> res= subset(res, padj<1)
+> res
+log2 fold change (MLE): Tissue root vs leaf 
+Wald test p-value: Tissue root vs leaf 
+DataFrame with 0 rows and 6 columns
+> res <- results(dds)
+> res= subset(res, padj<0.50)
+> res <- res[order(res$padj),]
+> res
+log2 fold change (MLE): Tissue root vs leaf 
+Wald test p-value: Tissue root vs leaf 
+DataFrame with 1 row and 6 columns
+                                                               baseMean log2FoldChange     lfcSE      stat       pvalue      padj
+                                                              <numeric>      <numeric> <numeric> <numeric>    <numeric> <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-59.0-mRNA-1:cds  1631.362       7.227866  1.881738  3.841059 0.0001225045 0.2251632
+> #only for two pairs
+> sampleFiles<- c("40095counts.file",
++                  "40094counts.file",
++                  "40097counts.file",
++                  "6066counts.file",
++                  "6067counts.file",
++                  "6069counts.file")
+> sampleNames <- c("MK aril 1", "MK aril 2", "MK aril 3", "MT aril 2", "MT aril 3", "MT aril 1")
+> sampleTissue <- c("MK", "MK", "MK", "MT", "MT", "MT")
+> 
+> 
+> 
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~ Tissue)
+> dds <- DESeq(ddsHTSeq)
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+> res <- results(dds)
+> res
+log2 fold change (MLE): Tissue MT vs MK 
+Wald test p-value: Tissue MT vs MK 
+DataFrame with 1990 rows and 6 columns
+                                                               baseMean log2FoldChange     lfcSE       stat    pvalue      padj
+                                                              <numeric>      <numeric> <numeric>  <numeric> <numeric> <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds  1.2531122     -2.1146092  3.853248 -0.5487862 0.5831522        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds  1.7748874     -2.6170316  3.846766 -0.6803200 0.4963019        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.1-mRNA-1:cds  0.5222666     -0.8509515  3.883981 -0.2190926 0.8265779        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.2-mRNA-1:cds  1.3570740     -2.2296580  3.851560 -0.5788974 0.5626584        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.3-mRNA-1:cds  3.2364147     -3.5641729  3.376264 -1.0556559 0.2911254        NA
+...                                                                 ...            ...       ...        ...       ...       ...
+augustus_masked-NSDW01000011.1-processed-gene-98.0-mRNA-1:cds 0.4178133     -0.5286104  3.897093 -0.1356422 0.8921041        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.1-mRNA-1:cds 0.5222666     -0.8509515  3.883981 -0.2190926 0.8265779        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.2-mRNA-1:cds 1.7009593     -2.2017932  3.543592 -0.6213451 0.5343726        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.3-mRNA-1:cds 3.1329444     -3.5013165  3.458148 -1.0124831 0.3113071        NA
+augustus_masked-NSDW01000011.1-processed-gene-99.0-mRNA-1:cds 6.0450879     -3.6950003  2.676046 -1.3807688 0.1673501        NA
+> res= subset(res, padj<0.05)
+> res <- res[order(res$padj),]
+> res
+log2 fold change (MLE): Tissue MT vs MK 
+Wald test p-value: Tissue MT vs MK 
+DataFrame with 7 rows and 6 columns
+                                                                baseMean log2FoldChange     lfcSE      stat       pvalue         padj
+                                                               <numeric>      <numeric> <numeric> <numeric>    <numeric>    <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-37.8-mRNA-1:cds   52.15522      -7.465201  1.412648 -5.284544 1.260186e-07 0.0001174493
+augustus_masked-NSDW01000011.1-processed-gene-19.3-mRNA-1:cds  513.70539      -5.071331  1.065243 -4.760727 1.928970e-06 0.0008988998
+augustus_masked-NSDW01000011.1-processed-gene-20.5-mRNA-1:cds  263.06378      -4.717813  1.046145 -4.509714 6.491518e-06 0.0020166982
+augustus_masked-NSDW01000011.1-processed-gene-197.0-mRNA-1:cds  19.29880      -6.706614  1.819880 -3.685195 2.285272e-04 0.0354978875
+augustus_masked-NSDW01000011.1-processed-gene-201.6-mRNA-1:cds  21.63029      -5.852765  1.575697 -3.714397 2.036887e-04 0.0354978875
+augustus_masked-NSDW01000011.1-processed-gene-217.2-mRNA-1:cds  58.21435      -5.521916  1.482728 -3.724161 1.959658e-04 0.0354978875
+augustus_masked-NSDW01000011.1-processed-gene-188.0-mRNA-1:cds 313.03106       4.011558  1.115069  3.597586 3.211845e-04 0.0427634197
+> sampleTable
+  sampleName         fileName Tissue
+1  MK aril 1 40095counts.file     MK
+2  MK aril 2 40094counts.file     MK
+3  MK aril 3 40097counts.file     MK
+4  MT aril 2  6066counts.file     MT
+5  MT aril 3  6067counts.file     MT
+6  MT aril 1  6069counts.file     MT
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue)
+> dds <- DESeq(ddsHTSeq)
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+> res <- results(dds)
+> res= subset(res, padj<0.05)
+> res <- res[order(res$padj),]
+> res
+log2 fold change (MLE): Tissue MT vs MK 
+Wald test p-value: Tissue MT vs MK 
+DataFrame with 7 rows and 6 columns
+                                                                baseMean log2FoldChange     lfcSE      stat       pvalue         padj
+                                                               <numeric>      <numeric> <numeric> <numeric>    <numeric>    <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-37.8-mRNA-1:cds   52.15522      -7.465201  1.412648 -5.284544 1.260186e-07 0.0001174493
+augustus_masked-NSDW01000011.1-processed-gene-19.3-mRNA-1:cds  513.70539      -5.071331  1.065243 -4.760727 1.928970e-06 0.0008988998
+augustus_masked-NSDW01000011.1-processed-gene-20.5-mRNA-1:cds  263.06378      -4.717813  1.046145 -4.509714 6.491518e-06 0.0020166982
+augustus_masked-NSDW01000011.1-processed-gene-197.0-mRNA-1:cds  19.29880      -6.706614  1.819880 -3.685195 2.285272e-04 0.0354978875
+augustus_masked-NSDW01000011.1-processed-gene-201.6-mRNA-1:cds  21.63029      -5.852765  1.575697 -3.714397 2.036887e-04 0.0354978875
+augustus_masked-NSDW01000011.1-processed-gene-217.2-mRNA-1:cds  58.21435      -5.521916  1.482728 -3.724161 1.959658e-04 0.0354978875
+augustus_masked-NSDW01000011.1-processed-gene-188.0-mRNA-1:cds 313.03106       4.011558  1.115069  3.597586 3.211845e-04 0.0427634197
+> treatments = c("MK", "MT")
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
++                                      levels = treatments)
+> dds <- DESeq(ddsHTSeq)
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+> res <- results(dds)
+> 
+> # order results by padj value (most significant to least)
+> res= subset(res, padj<0.05)
+> res <- res[order(res$padj),]
+> res
+log2 fold change (MLE): Tissue MT vs MK 
+Wald test p-value: Tissue MT vs MK 
+DataFrame with 7 rows and 6 columns
+                                                                baseMean log2FoldChange     lfcSE      stat       pvalue         padj
+                                                               <numeric>      <numeric> <numeric> <numeric>    <numeric>    <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-37.8-mRNA-1:cds   52.15522      -7.465201  1.412648 -5.284544 1.260186e-07 0.0001174493
+augustus_masked-NSDW01000011.1-processed-gene-19.3-mRNA-1:cds  513.70539      -5.071331  1.065243 -4.760727 1.928970e-06 0.0008988998
+augustus_masked-NSDW01000011.1-processed-gene-20.5-mRNA-1:cds  263.06378      -4.717813  1.046145 -4.509714 6.491518e-06 0.0020166982
+augustus_masked-NSDW01000011.1-processed-gene-197.0-mRNA-1:cds  19.29880      -6.706614  1.819880 -3.685195 2.285272e-04 0.0354978875
+augustus_masked-NSDW01000011.1-processed-gene-201.6-mRNA-1:cds  21.63029      -5.852765  1.575697 -3.714397 2.036887e-04 0.0354978875
+augustus_masked-NSDW01000011.1-processed-gene-217.2-mRNA-1:cds  58.21435      -5.521916  1.482728 -3.724161 1.959658e-04 0.0354978875
+augustus_masked-NSDW01000011.1-processed-gene-188.0-mRNA-1:cds 313.03106       4.011558  1.115069  3.597586 3.211845e-04 0.0427634197
+> sampleFiles<- c("40095counts.file",
++                  "40094counts.file",
++                  "40097counts.file",
++                  "40092counts.file",
++                  "6067counts.file")
+> sampleNames <- c("MK aril 1", "MK aril 2", "MK aril 3", "MT leaf")
+> sampleTissue <- c("aril", "aril", "aril", "leaf")
+> 
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+Error in data.frame(sampleName = sampleNames, fileName = sampleFiles,  : 
+  arguments imply differing number of rows: 4, 5
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory
++ 										design = ~ Tissue)
+Error: unexpected symbol in:
+"                                                                                directory = directory
+                                                                                design"
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+Error in data.frame(sampleName = sampleNames, fileName = sampleFiles,  : 
+  arguments imply differing number of rows: 4, 5
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~ Tissue)
+> sampleFiles<- c("40095counts.file",
++                  "40094counts.file",
++                  "40097counts.file",
++                  "40092counts.file",
++                  "6067counts.file")
+> sampleNames <- c("MK aril 1", "MK aril 2", "MK aril 3", "MT leaf")
+> sampleTissue <- c("aril", "aril", "aril", "leaf")
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+Error in data.frame(sampleName = sampleNames, fileName = sampleFiles,  : 
+  arguments imply differing number of rows: 4, 5
+> 
+> sampleFiles<- c("40095counts.file",
++                  "40094counts.file",
++                  "40097counts.file",
++                  "40092counts.file")
+> sampleNames <- c("MK aril 1", "MK aril 2", "MK aril 3", "MT leaf")
+> sampleTissue <- c("aril", "aril", "aril", "leaf")
+> 
+> 
+> 
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~ Tissue)
+> treatments = c("aril", "leaf")
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
++                                      levels = treatments)
+> #guts
+> dds <- DESeq(ddsHTSeq)
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+> res <- results(dds)
+> res
+log2 fold change (MLE): Tissue leaf vs aril 
+Wald test p-value: Tissue leaf vs aril 
+DataFrame with 1990 rows and 6 columns
+                                                               baseMean log2FoldChange     lfcSE       stat    pvalue      padj
+                                                              <numeric>      <numeric> <numeric>  <numeric> <numeric> <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds   3.374763      -1.292979  4.143291 -0.3120657 0.7549906        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds   4.470951      -2.815051  3.857344 -0.7297901 0.4655185        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.1-mRNA-1:cds   1.213703      -3.448075  5.689040 -0.6060909 0.5444544        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.2-mRNA-1:cds   3.499989      -2.442317  4.174414 -0.5850683 0.5585018        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.3-mRNA-1:cds   8.213681      -2.685841  3.048714 -0.8809751 0.3783313        NA
+...                                                                 ...            ...       ...        ...       ...       ...
+augustus_masked-NSDW01000011.1-processed-gene-98.0-mRNA-1:cds  1.173545     -0.6852953  5.513307 -0.1242984 0.9010790        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.1-mRNA-1:cds  1.416285     -1.0054613  5.503092 -0.1827084 0.8550268        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.2-mRNA-1:cds  6.079809      0.5808406  3.185332  0.1823485 0.8553092        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.3-mRNA-1:cds  9.218882     -0.4389157  2.858609 -0.1535417 0.8779711        NA
+augustus_masked-NSDW01000011.1-processed-gene-99.0-mRNA-1:cds 14.990902     -2.2043072  2.581221 -0.8539786 0.3931168        NA
+> res= subset(res, padj<0.05)
+> res <- res[order(res$padj),]
+> res
+log2 fold change (MLE): Tissue leaf vs aril 
+Wald test p-value: Tissue leaf vs aril 
+DataFrame with 170 rows and 6 columns
+                                                                 baseMean log2FoldChange     lfcSE       stat       pvalue         padj
+                                                                <numeric>      <numeric> <numeric>  <numeric>    <numeric>    <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-41.11-mRNA-1:cds  10458.265     -11.748720 0.9643489 -12.183059 3.826550e-34 3.570172e-31
+augustus_masked-NSDW01000011.1-processed-gene-208.2-mRNA-1:cds   3086.286      -7.848552 0.7781861 -10.085700 6.390811e-24 2.981313e-21
+augustus_masked-NSDW01000011.1-processed-gene-54.5-mRNA-1:cds    1137.305       7.086087 0.7227529   9.804301 1.078918e-22 3.355434e-20
+augustus_masked-NSDW01000011.1-processed-gene-58.4-mRNA-1:cds    1175.324      -8.594112 0.9413995  -9.129080 6.908378e-20 1.611379e-17
+augustus_masked-NSDW01000011.1-processed-gene-230.0-mRNA-1:cds   2290.691      -6.039805 0.6950302  -8.689989 3.624758e-18 6.763799e-16
+...                                                                   ...            ...       ...        ...          ...          ...
+augustus_masked-NSDW01000011.1-processed-gene-64.3-mRNA-1:cds   171.45476      -2.290285 0.8612647  -2.659211  0.007832386   0.04402179
+augustus_masked-NSDW01000011.1-processed-gene-19.10-mRNA-1:cds   30.64604       4.625503 1.7439844   2.652262  0.007995453   0.04440332
+augustus_masked-NSDW01000011.1-processed-gene-218.17-mRNA-1:cds  41.83824       4.463888 1.6830046   2.652332  0.007993778   0.04440332
+augustus_masked-NSDW01000011.1-processed-gene-228.6-mRNA-1:cds   27.19918       4.879944 1.8512938   2.635964  0.008389859   0.04631798
+augustus_masked-NSDW01000011.1-processed-gene-46.3-mRNA-1:cds    88.32534       2.650042 1.0161063   2.608036  0.009106342   0.04997775
+> sampleFiles<- c("40095counts.file",
++                  "40094counts.file",
++                  "40097counts.file",
++                  "40092counts.file",
++                  "40093counts.file",
++                  "40096counts.file")
+> sampleNames <- c("MK aril 1", "MK aril 2", "MK aril 3", "MT leaf", "MT root", "MT stem")
+> sampleTissue <- c("aril", "aril", "aril", "others", "others", "others")
+> 
+> 
+> 
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~ Tissue)
+> treatments = c("aril", "others")
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
++                                      levels = treatments)
+> #guts
+> dds <- DESeq(ddsHTSeq)
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+> res <- results(dds)
+> # order results by padj value (most significant to least)
+> res= subset(res, padj<0.05)
+> res <- res[order(res$padj),]
+> res
+log2 fold change (MLE): Tissue others vs aril 
+Wald test p-value: Tissue others vs aril 
+DataFrame with 422 rows and 6 columns
+                                                                baseMean log2FoldChange     lfcSE      stat       pvalue         padj
+                                                               <numeric>      <numeric> <numeric> <numeric>    <numeric>    <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-41.11-mRNA-1:cds 8189.0655     -11.264037 0.6227650 -18.08714 4.024543e-73 4.926041e-70
+augustus_masked-NSDW01000011.1-processed-gene-230.0-mRNA-1:cds 1810.4915      -5.923367 0.3702615 -15.99780 1.323809e-57 8.101708e-55
+augustus_masked-NSDW01000011.1-processed-gene-208.2-mRNA-1:cds 2425.6085      -7.464876 0.5212395 -14.32139 1.608627e-46 6.563197e-44
+augustus_masked-NSDW01000011.1-processed-gene-58.4-mRNA-1:cds   922.1223      -7.232645 0.5545342 -13.04274 6.989895e-39 2.138908e-36
+augustus_masked-NSDW01000011.1-processed-gene-61.11-mRNA-1:cds 5889.5065      -4.630424 0.3668185 -12.62320 1.572944e-36 3.850566e-34
+...                                                                  ...            ...       ...       ...          ...          ...
+augustus_masked-NSDW01000011.1-processed-gene-222.6-mRNA-1:cds 897.22121     -0.9959801 0.4145480 -2.402569   0.01628037   0.04767266
+augustus_masked-NSDW01000011.1-processed-gene-149.0-mRNA-1:cds  54.07793     -1.1953858 0.4978592 -2.401052   0.01634801   0.04775647
+augustus_masked-NSDW01000011.1-processed-gene-230.1-mRNA-1:cds  12.34352     -4.0091692 1.6784285 -2.388645   0.01691065   0.04916654
+augustus_masked-NSDW01000011.1-processed-gene-48.6-mRNA-1:cds  242.10887      1.4787126 0.6190614  2.388636   0.01691104   0.04916654
+augustus_masked-NSDW01000011.1-processed-gene-69.8-mRNA-1:cds   40.56405      2.5853215 1.0841100  2.384741   0.01709116   0.04957245
+2018-05-17 14:27:29.967 R[12378:6996013] warning: <NSRemoteView: 0x60000032c300> determined it was necessary to configure <_NSPopoverWindow: 0x7ff337c68130> to support remote view vibrancy
+> colData(ddsHTSeq)
+DataFrame with 6 rows and 1 column
+            Tissue
+          <factor>
+MK aril 1     aril
+MK aril 2     aril
+MK aril 3     aril
+MT leaf     others
+MT root     others
+MT stem     others
+> plotMA( res, ylim = c(-1, 1) )
+> plotMA( res, ylim = c(-5, 5) )
+> #####################for two arils set
+> sampleFiles<- c("40095counts.file",
++                  "40094counts.file",
++                  "40097counts.file",
++                  "6066counts.file",
++                  "6067counts.file",
++                  "6069counts.file")
+> sampleNames <- c("MK aril 1", "MK aril 2", "MK aril 3", "MT aril 2", "MT aril 3", "MT aril 1")
+> sampleTissue <- c("MK", "MK", "MK", "MT", "MT", "MT")
+> 
+> 
+> 
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~ Tissue)
+> treatments = c("MK", "MT")
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
++                                      levels = treatments)
+> #guts
+> dds <- DESeq(ddsHTSeq)
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+> res <- results(dds)
+> # order results by padj value (most significant to least)
+> res= subset(res, padj<0.05)
+> res <- res[order(res$padj),]
+> plotMA( res, ylim = c(-1, 1) )
+> plotMA( res, ylim = c(-8, 8) )
+> #####################for two arils set
+> sampleFiles<- c("40095counts.file",
++                  "40094counts.file",
++                  "40097counts.file",
++                  "6066counts.file",
++                  "6067counts.file",
++                  "6069counts.file")
+> sampleNames <- c("MK aril 1", "MK aril 2", "MK aril 3", "MT aril 2", "MT aril 3", "MT aril 1")
+> sampleTissue <- c("MK", "MK", "MK", "MT", "MT", "MT")
+> 
+> 
+> 
+> sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
+> directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
+> ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, 
++ 										directory = directory,
++ 										design = ~ Tissue)
+> treatments = c("MK", "MT")
+> colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
++                                      levels = treatments)
+> #guts
+> dds <- DESeq(ddsHTSeq)
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+> res <- results(dds)
+> plotMA( res, ylim = c(-1, 1) )
+> plotMA( res, ylim = c(-8, 8) )
+> plotMA( res, ylim = c(-10, 10) )
+> rld <- rlogTransformation(dds, blind=T)
+> vsd <- varianceStabilizingTransformation(dds, blind=T)
+> head( assay(rld) )
+                                                                 MK aril 1  MK aril 2  MK aril 3  MT aril 2  MT aril 3  MT aril 1
+augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds    1.17236426  0.1735279 -0.4764455  0.7464087 -0.4693145 -0.4961789
+augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds    1.60962389  0.9380370 -0.3596128  1.0900278 -0.3482012 -0.3917432
+augustus_masked-NSDW01000011.1-processed-gene-1.1-mRNA-1:cds   -0.04787631 -0.8828294 -0.8833180 -0.1646312 -0.8814265 -0.8883908
+augustus_masked-NSDW01000011.1-processed-gene-1.2-mRNA-1:cds    1.15415334  0.8321274 -0.2866990  0.9433527 -0.2794987 -0.3065564
+augustus_masked-NSDW01000011.1-processed-gene-1.3-mRNA-1:cds    2.48004859  1.7657138 -0.6224366  1.3975493 -0.5905871 -0.7210732
+augustus_masked-NSDW01000011.1-processed-gene-100.0-mRNA-1:cds  5.87688487  5.6778063  6.0629036  3.4409100  4.9801933  5.8787782
+> par( mfrow = c( 1, 2 ) ) 
+> plot( log2( 1+counts(dds, normalized=TRUE)[, 1:2] ), col="#00000020", pch=20, cex=0.3 ) 
+> plot( assay(rld)[, 1:2], col="#00000020", pch=20, cex=0.3 )
+> plot( log2( 1+counts(dds, normalized=TRUE)[, 1:2] ), col="#00000020", pch=20, cex=0.3 ) 
+> plot( assay(rld)[, 1:2], col="#00000020", pch=20, cex=0.3 )
+> ramp <- 1:3/3 
+> cols <- c(rgb(ramp, 0, 0), rgb(0, ramp, 0), rgb(0, 0, ramp), rgb(ramp, 0, ramp)) 
+> print( plotPCA( rld, intgroup = c( "Tiuuse"), col=cols ) )
+Error in .local(object, ...) : 
+  unused argument (col = c("#550000", "#AA0000", "#FF0000", "#005500", "#00AA00", "#00FF00", "#000055", "#0000AA", "#0000FF", "#550055", "#AA00AA", "#FF00FF"))
+> cols <- c(rgb(ramp, 0, 0), rgb(0, ramp, 0), rgb(0, 0, ramp), rgb(ramp, 0, ramp)) 
+> print(  plotPCA( rld, intgroup = c( "Tiuuse"),  col=cols ) )
+Error in .local(object, ...) : 
+  unused argument (col = c("#550000", "#AA0000", "#FF0000", "#005500", "#00AA00", "#00FF00", "#000055", "#0000AA", "#0000FF", "#550055", "#AA00AA", "#FF00FF"))
+> 
+> print(  plotPCA( rld, intgroup  =  c( "Tiuuse"),  col = cols ) )
+Error in .local(object, ...) : 
+  unused argument (col = c("#550000", "#AA0000", "#FF0000", "#005500", "#00AA00", "#00FF00", "#000055", "#0000AA", "#0000FF", "#550055", "#AA00AA", "#FF00FF"))
+> ramp <- 1:3/3 
+> cols <- c(rgb(ramp, 0, 0), 
++ 	rgb(0, ramp, 0), 
++ 	rgb(0, 0, ramp), 
++ 	rgb(ramp, 0, ramp))
+> print(  plotPCA( rld, intgroup  =  c( "Tiuuse"),  col = cols ) )
+Error in .local(object, ...) : 
+  unused argument (col = c("#550000", "#AA0000", "#FF0000", "#005500", "#00AA00", "#00FF00", "#000055", "#0000AA", "#0000FF", "#550055", "#AA00AA", "#FF00FF"))
+> head( assay(rld) )
+                                                                 MK aril 1  MK aril 2  MK aril 3  MT aril 2  MT aril 3  MT aril 1
+augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds    1.17236426  0.1735279 -0.4764455  0.7464087 -0.4693145 -0.4961789
+augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds    1.60962389  0.9380370 -0.3596128  1.0900278 -0.3482012 -0.3917432
+augustus_masked-NSDW01000011.1-processed-gene-1.1-mRNA-1:cds   -0.04787631 -0.8828294 -0.8833180 -0.1646312 -0.8814265 -0.8883908
+augustus_masked-NSDW01000011.1-processed-gene-1.2-mRNA-1:cds    1.15415334  0.8321274 -0.2866990  0.9433527 -0.2794987 -0.3065564
+augustus_masked-NSDW01000011.1-processed-gene-1.3-mRNA-1:cds    2.48004859  1.7657138 -0.6224366  1.3975493 -0.5905871 -0.7210732
+augustus_masked-NSDW01000011.1-processed-gene-100.0-mRNA-1:cds  5.87688487  5.6778063  6.0629036  3.4409100  4.9801933  5.8787782
+> plot( log2( 1+counts(dds, normalized=TRUE)[, 1:2] ), col="#00000020", pch=20, cex=0.3 ) 
+> plot( assay(rld)[, 1:2], col="#00000020", pch=20, cex=0.3 )
+> plot( log2( 1+counts(dds, normalized=TRUE)[, 1:2] ), col="#00000020", pch=20, cex=0.3 ) 
+> plot( assay(rld)[, 1:2], col="#00000020", pch=20, cex=0.3 )
+> 
+> 
+> plot( log2( 1+counts(dds, normalized=TRUE)[, 1:2] ), col="#00000020", pch=20, cex=0.3 ) 
+> plot( assay(rld)[, 1:2], col="#00000020", pch=20, cex=0.3 )
+> sampleDists <- dist( t( assay(rld) ) ) 
+> sampleDists
+          MK aril 1 MK aril 2 MK aril 3 MT aril 2 MT aril 3
+MK aril 2  50.95557                                        
+MK aril 3  93.34036  58.45960                              
+MT aril 2  92.66314 101.37108 122.90693                    
+MT aril 3 100.60976  69.55407  53.04730 125.42522          
+MT aril 1 100.35240  69.22109  57.80561 133.00892  58.63288
+> sampleDistMatrix <- as.matrix( sampleDists ) 
+> rownames(sampleDistMatrix) <- paste( rld$treatment, rld$patient, sep="-" ) 
+> colnames(sampleDistMatrix) <- NULL 
+> library( "gplots" ) 
+Error in library("gplots") : there is no package called 'gplots'
+> library( "RColorBrewer" ) 
+> colours = colorRampPalette( rev(brewer.pal(9, "Blues")) )(255) 
+> heatmap.2( sampleDistMatrix, trace="none", col=colours)
+Error in heatmap.2(sampleDistMatrix, trace = "none", col = colours) : 
+  could not find function "heatmap.2"
+trying URL 'https://ftp.acc.umu.se/mirror/CRAN/bin/macosx/el-capitan/contrib/3.4/gplots_3.0.1.tgz'
+Content type 'application/x-tar' length 511191 bytes (499 KB)
+==================================================
+downloaded 499 KB
+
+tar: Failed to set default locale
+
+The downloaded binary packages are in
+	/var/folders/f3/9n5djfxd7bbbhpxt8ngx5xp40000gn/T//RtmpKH0ZD8/downloaded_packages
+> sampleDistMatrix <- as.matrix( sampleDists ) 
+> rownames(sampleDistMatrix) <- paste( rld$treatment, rld$patient, sep="-" ) 
+> colnames(sampleDistMatrix) <- NULL 
+> library( "gplots" ) 
+Error: package or namespace load failed for 'gplots' in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called 'gtools'
+> library( "RColorBrewer" ) 
+> colours = colorRampPalette( rev(brewer.pal(9, "Blues")) )(255) 
+> heatmap.2( sampleDistMatrix, trace="none", col=colours)
+Error in heatmap.2(sampleDistMatrix, trace = "none", col = colours) : 
+  could not find function "heatmap.2"
+> 
+> library( "gplots" ) 
+Error: package or namespace load failed for 'gplots' in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called 'gtools'
+trying URL 'https://ftp.acc.umu.se/mirror/CRAN/bin/macosx/el-capitan/contrib/3.4/gtools_3.5.0.tgz'
+Content type 'application/x-tar' length 134124 bytes (130 KB)
+==================================================
+downloaded 130 KB
+
+tar: Failed to set default locale
+
+The downloaded binary packages are in
+	/var/folders/f3/9n5djfxd7bbbhpxt8ngx5xp40000gn/T//RtmpKH0ZD8/downloaded_packages
+> sampleDistMatrix <- as.matrix( sampleDists ) 
+> rownames(sampleDistMatrix) <- paste( rld$treatment, rld$patient, sep="-" ) 
+> colnames(sampleDistMatrix) <- NULL 
+> library( "gplots" ) 
+Error: package or namespace load failed for 'gplots' in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called 'gdata'
+> library( "RColorBrewer" ) 
+> colours = colorRampPalette( rev(brewer.pal(9, "Blues")) )(255) 
+> heatmap.2( sampleDistMatrix, trace="none", col=colours)
+Error in heatmap.2(sampleDistMatrix, trace = "none", col = colours) : 
+  could not find function "heatmap.2"
+> library( "gtools" )
+> sampleDistMatrix <- as.matrix( sampleDists ) 
+> rownames(sampleDistMatrix) <- paste( rld$treatment, rld$patient, sep="-" ) 
+> colnames(sampleDistMatrix) <- NULL 
+> library( "gplots" ) 
+Error: package or namespace load failed for 'gplots' in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called 'gdata'
+> library( "RColorBrewer" ) 
+> colours = colorRampPalette( rev(brewer.pal(9, "Blues")) )(255) 
+> heatmap.2( sampleDistMatrix, trace="none", col=colours)
+Error in heatmap.2(sampleDistMatrix, trace = "none", col = colours) : 
+  could not find function "heatmap.2"
+> library( "gplots" ) 
+Error: package or namespace load failed for 'gplots' in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called 'gdata'
+trying URL 'https://ftp.acc.umu.se/mirror/CRAN/bin/macosx/el-capitan/contrib/3.4/gdata_2.18.0.tgz'
+Content type 'application/x-tar' length 1141723 bytes (1.1 MB)
+==================================================
+downloaded 1.1 MB
+
+tar: Failed to set default locale
+The downloaded binary packages are in
+	/var/folders/f3/9n5djfxd7bbbhpxt8ngx5xp40000gn/T//RtmpKH0ZD8/downloaded_packages
+> library("gdata")
+gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
+
+perl: warning: Setting locale failed.
+gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
+
+Attaching package: 'gdata'
+
+The following object is masked from 'package:SummarizedExperiment':
+
+    trim
+
+The following object is masked from 'package:Biobase':
+
+    combine
+
+The following object is masked from 'package:GenomicRanges':
+
+    trim
+
+The following object is masked from 'package:IRanges':
+
+    trim
+
+The following objects are masked from 'package:S4Vectors':
+
+    first, first<-
+
+The following object is masked from 'package:BiocGenerics':
+
+    combine
+
+The following object is masked from 'package:stats4':
+
+    nobs
+
+The following object is masked from 'package:stats':
+
+    nobs
+
+The following object is masked from 'package:utils':
+
+    object.size
+
+The following object is masked from 'package:base':
+
+    startsWith
+
+perl: warning: Please check that your locale settings:
+	LC_ALL = (unset),
+	LANG = "en_CN.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+> 
+> 
+> sampleDistMatrix <- as.matrix( sampleDists ) 
+> rownames(sampleDistMatrix) <- paste( rld$treatment, rld$patient, sep="-" ) 
+> colnames(sampleDistMatrix) <- NULL 
+> library( "gplots" ) 
+Error: package or namespace load failed for 'gplots' in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called 'caTools'
+> library( "RColorBrewer" ) 
+> colours = colorRampPalette( rev(brewer.pal(9, "Blues")) )(255) 
+> heatmap.2( sampleDistMatrix, trace="none", col=colours)
+Error in heatmap.2(sampleDistMatrix, trace = "none", col = colours) : 
+  could not find function "heatmap.2"
+trying URL 'https://ftp.acc.umu.se/mirror/CRAN/bin/macosx/el-capitan/contrib/3.4/caTools_1.17.1.tgz'
+Content type 'application/x-tar' length 199003 bytes (194 KB)
+==================================================
+downloaded 194 KB
+
+tar: Failed to set default locale
+
+The downloaded binary packages are in
+	/var/folders/f3/9n5djfxd7bbbhpxt8ngx5xp40000gn/T//RtmpKH0ZD8/downloaded_packages
+> library("caTools")
+
+Attaching package: 'caTools'
+
+The following object is masked from 'package:IRanges':
+
+    runmean
+
+The following object is masked from 'package:S4Vectors':
+
+    runmean
+
+> sampleDistMatrix <- as.matrix( sampleDists ) 
+> rownames(sampleDistMatrix) <- paste( rld$treatment, rld$patient, sep="-" ) 
+> colnames(sampleDistMatrix) <- NULL 
+> library( "gplots" ) 
+
+Attaching package: 'gplots'
+
+The following object is masked from 'package:IRanges':
+
+    space
+
+The following object is masked from 'package:S4Vectors':
+
+    space
+
+The following object is masked from 'package:stats':
+
+    lowess
+
+> library( "RColorBrewer" ) 
+> colours = colorRampPalette( rev(brewer.pal(9, "Blues")) )(255) 
+> heatmap.2( sampleDistMatrix, trace="none", col=colours)
+> library( "genefilter" ) 
+
+Attaching package: 'genefilter'
+
+The following objects are masked from 'package:matrixStats':
+
+    rowSds, rowVars
+
+> topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 35 )
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		scale="row", trace="none", dendrogram="column",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 350 )
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		scale="row", trace="none", dendrogram="column",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> res
+log2 fold change (MLE): Tissue MT vs MK 
+Wald test p-value: Tissue MT vs MK 
+DataFrame with 1990 rows and 6 columns
+                                                               baseMean log2FoldChange     lfcSE       stat    pvalue      padj
+                                                              <numeric>      <numeric> <numeric>  <numeric> <numeric> <numeric>
+augustus_masked-NSDW01000011.1-processed-gene-0.0-mRNA-1:cds  1.2531122     -2.1146092  3.853248 -0.5487862 0.5831522        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.0-mRNA-1:cds  1.7748874     -2.6170316  3.846766 -0.6803200 0.4963019        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.1-mRNA-1:cds  0.5222666     -0.8509515  3.883981 -0.2190926 0.8265779        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.2-mRNA-1:cds  1.3570740     -2.2296580  3.851560 -0.5788974 0.5626584        NA
+augustus_masked-NSDW01000011.1-processed-gene-1.3-mRNA-1:cds  3.2364147     -3.5641729  3.376264 -1.0556559 0.2911254        NA
+...                                                                 ...            ...       ...        ...       ...       ...
+augustus_masked-NSDW01000011.1-processed-gene-98.0-mRNA-1:cds 0.4178133     -0.5286104  3.897093 -0.1356422 0.8921041        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.1-mRNA-1:cds 0.5222666     -0.8509515  3.883981 -0.2190926 0.8265779        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.2-mRNA-1:cds 1.7009593     -2.2017932  3.543592 -0.6213451 0.5343726        NA
+augustus_masked-NSDW01000011.1-processed-gene-98.3-mRNA-1:cds 3.1329444     -3.5013165  3.458148 -1.0124831 0.3113071        NA
+augustus_masked-NSDW01000011.1-processed-gene-99.0-mRNA-1:cds 6.0450879     -3.6950003  2.676046 -1.3807688 0.1673501        NA
+> summary(res)
+
+out of 1941 with nonzero total read count
+adjusted p-value < 0.1
+LFC > 0 (up)     : 7, 0.36% 
+LFC < 0 (down)   : 10, 0.52% 
+outliers [1]     : 32, 1.6% 
+low counts [2]   : 977, 50% 
+(mean count < 6)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
+
+> topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 350 )
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		scale="row", trace="none", dendrogram="both",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		scale="row", trace="none", dendrogram="column",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		margins=c(12,8),
++ 		scale="row", trace="none", dendrogram="column",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		margins=c(12,12),
++ 		scale="row", trace="none", dendrogram="column",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		margins=c(1,20),
++ 		scale="row", trace="none", dendrogram="column",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		margins=c(1,20),
++ 		scale="row", trace="none", dendrogram="column",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		margins=c(5,30),
++ 		scale="row", trace="none", dendrogram="column",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
+> heatmap.2( assay(rld)[ topVarGenes, ], 
++ 		margins=c(8,30),
++ 		scale="row", trace="none", dendrogram="column",
++ 		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
+> 
+> 

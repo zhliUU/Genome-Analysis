@@ -3,7 +3,7 @@
 ## Zhiwei LI
 
 ## 1. Aim of the project.
-
+[Data Description]: https://github.com/zhliUU/Genome-Analysis/blob/master/data_description.md
 1. De novo assembly of Durian and do structural and functional annotation.
 2. Transcriptome assembly and analyses differential expression.
 3. Biological interpretation of the results.
@@ -63,7 +63,8 @@ The biggest bottleneck will be DNA assembly of PacBio reads(17h). RNA assembly, 
 
 ## 3. Time frame
 
-Check work log
+Check  
+[work log]: https://github.com/zhliUU/Genome-Analysis/blob/master/lab-log.md
 
 ## 4. Data handling
 

@@ -1,5 +1,7 @@
 # Paper 5: Durian(Durio zibethinus) genome analyses
 
+## Zhiwei LI
+
 ## 1. Aim of the project.
 
 1. De novo assembly of Durian and do structural and functional annotation.
@@ -61,16 +63,7 @@ The biggest bottleneck will be DNA assembly of PacBio reads(17h). RNA assembly, 
 
 ## 3. Time frame
 
-| Week | Focus                       |
-| :--- | :-------------------------- |
-| 14   | Setup Github; Documentation |
-| 15   | Documentation;              |
-| 16   | 1,2,3                       |
-| 17   | 4,5,6                       |
-| 18   | 7,8,9                       |
-| 19   | 10,11,12                    |
-| 20   |                             |
-| 21   |                             |
+Check work log
 
 ## 4. Data handling
 

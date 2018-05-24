@@ -29,6 +29,8 @@ res <- results(dds)
 # order results by padj value (most significant to least)
 res= subset(res, padj<0.05)
 res <- res[order(res$padj),]
+#print the res to see how many genes are significant
+#res
 # DESeq2 has two options:  1) rlog transformed and 2) variance stabilization
 # variance stabilization is very good for heatmaps, etc.
 rld <- rlogTransformation(dds, blind=T)
@@ -87,6 +89,8 @@ res <- results(dds)
 # order results by padj value (most significant to least)
 res= subset(res, padj<0.05)
 res <- res[order(res$padj),]
+#print the res to see how many genes are significant
+#res
 rld <- rlogTransformation(dds, blind=T)
 ###Gene clustering###
 library( "genefilter" )
@@ -118,7 +122,8 @@ res <- results(dds)
 # order results by padj value (most significant to least)
 res= subset(res, padj<0.05)
 res <- res[order(res$padj),]
-
+#print the res to see how many genes are significant
+#res
 rld <- rlogTransformation(dds, blind=T)
 topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
 heatmap.2( assay(rld)[ topVarGenes, ],
@@ -134,8 +139,6 @@ sampleFiles<- c("40095counts.file",
 sampleNames <- c("MK aril 1", "MK aril 2", "MK aril 3", "MK root")
 sampleTissue <- c("aril", "aril", "aril", "root")
 
-
-
 sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
 directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
 ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,
@@ -150,6 +153,14 @@ res <- results(dds)
 # order results by padj value (most significant to least)
 res= subset(res, padj<0.05)
 res <- res[order(res$padj),]
+#print the res to see how many genes are significant
+#res
+rld <- rlogTransformation(dds, blind=T)
+topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
+heatmap.2( assay(rld)[ topVarGenes, ],
+		margins=c(8,30), key = FALSE,
+		scale="row", trace="none", dendrogram="column",
+		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
 
 ################compare inside one arils to stem
 sampleFiles<- c("40095counts.file",
@@ -158,8 +169,6 @@ sampleFiles<- c("40095counts.file",
                  "40093counts.file")
 sampleNames <- c("MK aril 1", "MK aril 2", "MK aril 3", "MK stem")
 sampleTissue <- c("aril", "aril", "aril", "stem")
-
-
 
 sampleTable <- data.frame(sampleName = sampleNames, fileName = sampleFiles, Tissue = sampleTissue)
 directory <- "/Users/apple/Documents/GenoA/Genome-Analysis/analyses/12_HTseq"
@@ -175,6 +184,14 @@ res <- results(dds)
 # order results by padj value (most significant to least)
 res= subset(res, padj<0.05)
 res <- res[order(res$padj),]
+#print the res to see how many genes are significant
+#res
+rld <- rlogTransformation(dds, blind=T)
+topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
+heatmap.2( assay(rld)[ topVarGenes, ],
+		margins=c(8,30), key = FALSE,
+		scale="row", trace="none", dendrogram="column",
+		col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
 
 ################compare inside one arils to all others
 sampleFiles<- c("40095counts.file",
@@ -202,7 +219,8 @@ res <- results(dds)
 # order results by padj value (most significant to least)
 res= subset(res, padj<0.05)
 res <- res[order(res$padj),]
-
+#print the res to see how many genes are significant
+#res
 rld <- rlogTransformation(dds, blind=F)
 topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 17 )
 heatmap.2( assay(rld)[ topVarGenes, ],

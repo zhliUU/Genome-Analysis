@@ -10,7 +10,7 @@
 
 ## 2. Type of analyses
 
-[Data Description](https://github.com/zhliUU/Genome-Analysis/blob/master/data_description.md)
+Check [data description](https://github.com/zhliUU/Genome-Analysis/blob/master/data_description.md)
 ### Table of analyses and the employed application.
 
 No reads quality control and reads preprocessing since we are working with PacBio reads.
@@ -49,9 +49,9 @@ No reads quality control and reads preprocessing since we are working with PacBi
 
 ### Extra analyses:
 
-●  Assembly with different parameters.
+●  ~~Assembly with different parameters.~~
 
-●  Assembly evaluation with more than one method.
+●  ~~Assembly evaluation with more than one method.~~
 
 ●  Deeper analyses of differential expression analyses: e.g. different comparisons.
 

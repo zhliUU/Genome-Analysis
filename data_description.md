@@ -67,5 +67,3 @@
 --   Contigs      -> 'durian.contigs.gfa'.
 
 --   Unitigs      -> 'durian.unitigs.gfa'.
-
-## Output of 02_RNA_rawData_QC

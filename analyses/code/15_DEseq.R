@@ -26,6 +26,13 @@ colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
 #guts
 dds <- DESeq(ddsHTSeq)
 res <- results(dds)
+
+#save original table
+res <- res[order(res$padj),]
+resdata <- merge(as.data.frame(res), as.data.frame(counts(dds,normalized =TRUE)), by = 'row.names', sort = FALSE)
+names(resdata)[1] <- 'gene'
+write.csv(resdata, file = "-results-Sorted.csv")
+
 # order results by padj value (most significant to least)
 res= subset(res, padj<0.05)
 res <- res[order(res$padj),]
@@ -86,12 +93,25 @@ colData(ddsHTSeq)$Tissue <- factor(colData(ddsHTSeq)$Tissue,
 #guts
 dds <- DESeq(ddsHTSeq)
 res <- results(dds)
+#save original table
+res <- res[order(res$padj),]
+resdata <- merge(as.data.frame(res), as.data.frame(counts(dds,normalized =TRUE)), by = 'row.names', sort = FALSE)
+names(resdata)[1] <- 'gene'
+write.csv(resdata, file = "RmMT2-results-Sorted.csv")
 # order results by padj value (most significant to least)
 res= subset(res, padj<0.05)
 res <- res[order(res$padj),]
 #print the res to see how many genes are significant
 #res
 rld <- rlogTransformation(dds, blind=T)
+sampleDists <- dist( t( assay(rld) ) )
+sampleDists
+sampleDistMatrix <- as.matrix( sampleDists )
+rownames(sampleDistMatrix) <- paste( rld$Tissue )
+colnames(sampleDistMatrix) <- NULL
+colours = colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+heatmap.2( sampleDistMatrix, margins=c(8,30), key = FALSE, trace="none", col=colours)
+
 ###Gene clustering###
 library( "genefilter" )
 topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 50 )

@@ -1,3 +1,7 @@
+Repository for the master’s-level course *Genome Analysis*. Over two months, this course provides hands-on experience with the University’s high-performance computing system, [UPPMAX](https://www.uu.se/en/centre/uppmax), and covers the design, execution, and documentation of a genomics research project.
+
+Project focus: reproducing findings from the original paper, “[The draft genome of tropical fruit durian (Durio zibethinus)](https://www.nature.com/articles/ng.3972)” by Teh et al., *Nature Genetics*, 49, 1633–1641 (2017).
+
 # Paper 5: Durian(Durio zibethinus) genome analyses
 
 ## Zhiwei LI
